@@ -19,8 +19,9 @@ public class CheckAttackDecision : Decision {
 
 			if(Player.instance.enemyNo < Utility.MAX_ATTK_ENEMY)
 				Player.instance.enemyNo++;
-
+			
 			return true;
+
 		} else {
 
 			return false;

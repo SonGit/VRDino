@@ -16,6 +16,10 @@ public class Dino : Enemy {
 			rb.useGravity = false;
 			rb.isKinematic = false;
 		}
+
+		gameObject.SetActive (false);
+		Destroy ();
+
 		yield return new WaitForSeconds (1);
 	}
 		
@@ -48,6 +52,14 @@ public class Dino : Enemy {
 		animator.enabled = false;
 	}
 
+	public override void OnLive ()
+	{
+		gameObject.SetActive (true);
+	}
 
+	public override void OnDestroy ()
+	{
+		
+	}
 
 }

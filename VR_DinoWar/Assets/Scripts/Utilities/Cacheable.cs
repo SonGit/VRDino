@@ -27,14 +27,14 @@ public abstract class Cacheable : MonoBehaviour {
 	{
 		OnDestroy ();
 		_living = false;
-		gameObject.hideFlags = HideFlags.HideInHierarchy;
+		//gameObject.hideFlags = HideFlags.HideInHierarchy;
 	}
 
 	public void Live()
 	{
 		OnLive ();
 		_living = true;
-		gameObject.hideFlags = HideFlags.HideInHierarchy;
+		//gameObject.hideFlags = HideFlags.HideInHierarchy;
 	}
 
 	public abstract void OnDestroy ();

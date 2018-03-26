@@ -28,4 +28,14 @@ public class Player : Character {
 		Debug.Log ("player Die");
 	}
 
+	public override void OnLive ()
+	{
+
+	}
+
+	public override void OnDestroy ()
+	{
+
+	}
+
 }

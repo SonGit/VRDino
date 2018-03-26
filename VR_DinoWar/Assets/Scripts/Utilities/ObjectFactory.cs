@@ -17,7 +17,8 @@ public class ObjectFactory: MonoBehaviour {
 		None,
 		HitNumber,
 		TextHitRandom,
-		DeathSkull
+		DeathSkull,
+		Dino
 	}
 
 	public Dictionary<PrefabType,string> PrefabPaths = new Dictionary<PrefabType, string> {
@@ -26,13 +27,14 @@ public class ObjectFactory: MonoBehaviour {
 		{ PrefabType.HitNumber, "Prefabs/HitNumber" },
 		{ PrefabType.TextHitRandom, "Prefabs/TextHitRandom" },
 		{ PrefabType.DeathSkull, "Prefabs/DeathSkull" },
+		{ PrefabType.Dino, "Prefabs/DinoFat" },
 	};
 
 	public GameObject MakeObject(PrefabType type)
 	{
 		string path;
 		if (PrefabPaths.TryGetValue (type, out path)) {
-			return (Instantiate (Resources.Load (path, typeof(GameObject))) as GameObject);
+			return (Instantiate (Resources.Load (path, typeof(GameObject)) as GameObject, Spawner.instance.GetRandomSpawner(),Quaternion.identity));
 		}
 		print ("NULL");
 		return null;

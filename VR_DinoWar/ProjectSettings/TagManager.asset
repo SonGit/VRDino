@@ -8,6 +8,8 @@ TagManager:
   - SkyPath
   - Enemy
   - Terrain
+  - FxTemporaire
+  - Spawner
   layers:
   - Default
   - TransparentFX

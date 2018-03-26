@@ -13,4 +13,14 @@ public class FlyingDino : Enemy {
 	void Update () {
 		Loop ();
 	}
+
+	public override void OnLive ()
+	{
+
+	}
+
+	public override void OnDestroy ()
+	{
+
+	}
 }

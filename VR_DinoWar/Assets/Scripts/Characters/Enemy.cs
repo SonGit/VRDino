@@ -52,17 +52,17 @@ public abstract class Enemy : Character {
 			}
 		}
 
-		if (agent.isOnOffMeshLink) {
-			if (!isJumping) {
-				stateController.AIEnabled = false;
-				agent.speed = 1;
-
-				isJumping = true;
-
-				animator.SetInteger ("State", 2);
-				print ("JUMPING");
-			}
-		}
+//		if (agent.isOnOffMeshLink) {
+//			if (!isJumping) {
+//				stateController.AIEnabled = false;
+//				agent.speed = 1;
+//
+//				isJumping = true;
+//
+//				animator.SetInteger ("State", 2);
+//				print ("JUMPING");
+//			}
+//		}
 	}
 		
 		

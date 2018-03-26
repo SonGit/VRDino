@@ -28,7 +28,7 @@ public class AttackAction : Action {
 			
 		float distanceToPlayer = Vector3.Distance(controller.transform.position,controller.playerReference.transform.position);
 
-		if (distanceToPlayer <= 2) {
+		if (distanceToPlayer <= 4) {
 			controller.enemy.FaceTarget (controller.playerReference.transform.position);
 			controller.enemy.LocalAvoidanceOn ();
 		} else {

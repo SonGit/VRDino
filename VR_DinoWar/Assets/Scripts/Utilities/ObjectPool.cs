@@ -14,6 +14,8 @@ public class ObjectPool : MonoBehaviour {
 
 	GenericObject<DeathSkull> deathSkulls;
 
+	GenericObject<Dino> dinos;
+
 	void Awake()
 	{
 		instance = this;
@@ -24,6 +26,7 @@ public class ObjectPool : MonoBehaviour {
 		hitNumbers = new GenericObject<HitNumber>(ObjectFactory.PrefabType.HitNumber,10);
 		textHitRandoms = new GenericObject<TextHitRandom>(ObjectFactory.PrefabType.TextHitRandom,10);
 		deathSkulls = new GenericObject<DeathSkull>(ObjectFactory.PrefabType.DeathSkull,10);
+		dinos = new GenericObject<Dino>(ObjectFactory.PrefabType.Dino,10);
 	}
 
 	public HitNumber GetHitNumber()
@@ -39,5 +42,10 @@ public class ObjectPool : MonoBehaviour {
 	public DeathSkull GetDeathSkulls()
 	{
 		return deathSkulls.GetObj ();
+	}
+
+	public Dino GetDinos()
+	{
+		return dinos.GetObj ();
 	}
 }
