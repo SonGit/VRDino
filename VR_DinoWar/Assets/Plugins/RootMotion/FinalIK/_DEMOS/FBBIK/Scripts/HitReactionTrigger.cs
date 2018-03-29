@@ -28,6 +28,8 @@ namespace RootMotion.Demos {
 
 					// Just for GUI
 					colliderName = hit.collider.name;
+
+					Debug.DrawLine (Camera.main.transform.position, Camera.main.transform.position + ray.direction * 100f);
 				}
 			}
 		}

@@ -10,15 +10,18 @@ public abstract class Enemy : Character {
 	public HitReaction hitReaction;
 	public FullBodyBipedIK bodyIK;
 	public Transform puppet;
+	public Transform stunEffectPosition;
 	public float countAttack;
 	public float rate;
 	public bool isAttack;
+	public AudioClip deathClip;
 
 	[HideInInspector] public Animator animator;
 	[HideInInspector] public NavMeshAgent agent;
 	[HideInInspector] public float initialSpeed; 
 	[HideInInspector] public NavMeshObstacle obs;
 	[HideInInspector] public bool isIdleDone;
+
 
 	public delegate void OnIdleAnimOverEvent (StateController controller);
 	public OnIdleAnimOverEvent onIdleAnimDone;
@@ -29,6 +32,7 @@ public abstract class Enemy : Character {
 	public bool isJumping;
 
 	protected StateController stateController;
+	private AudioSource EnemyAudio;
 
 
 
@@ -39,6 +43,7 @@ public abstract class Enemy : Character {
 		stateController = this.GetComponentInChildren<StateController> ();
 		obs = this.GetComponentInChildren<NavMeshObstacle> ();
 		initialSpeed = agent.speed;
+		EnemyAudio = this.GetComponent<AudioSource> ();
 	}
 
 	protected void Loop()
@@ -49,6 +54,8 @@ public abstract class Enemy : Character {
 			stunTime -= Time.deltaTime;
 			if (stunTime <= 0) {
 				stateController.Resume ();
+				stunEffect.Destroy ();
+				stunEffect = null;
 			}
 		}
 
@@ -78,6 +85,8 @@ public abstract class Enemy : Character {
 			Vector3 dir = hitCollider.transform.position - collisionPoint;
 			hitReaction.Hit (hitCollider,dir.normalized * impact/6 ,collisionPoint);
 
+			EnemyAudio.Play ();
+
 			// Show hit number pop up
 			ShowHitNumber (damage);
 
@@ -100,6 +109,7 @@ public abstract class Enemy : Character {
 		stateController.AIEnabled = false;
 		agent.enabled = false;
 		animator.SetInteger ("State", 8);
+		StunEffect (stunEffectPosition);
 	}
 
 	// Call by animation event
@@ -198,7 +208,9 @@ public abstract class Enemy : Character {
 		stateController.enabled = false;
 		obs.enabled = false;
 		agent.enabled = false;
-		animator.SetInteger ("State", 11);
+		//animator.SetTrigger ("DieTrigger");
+		EnemyAudio.clip = deathClip;
+		EnemyAudio.Play ();
 		DieEffect();
 		print("DIE");
 		ApplyPhysics ();
@@ -273,4 +285,19 @@ public abstract class Enemy : Character {
 			ds.Live ();
 		}
 	}
+
+	StunEffect stunEffect;
+
+	protected void StunEffect(Transform pos)
+	{
+		if (stunEffect != null)
+			return;
+		
+		stunEffect = ObjectPool.instance.GetStunEffect ();
+		stunEffect.transform.position = stunEffectPosition.position;
+		stunEffect.Live ();
+	}
+
+
+		
 }

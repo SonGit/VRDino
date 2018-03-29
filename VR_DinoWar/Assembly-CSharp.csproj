@@ -114,6 +114,7 @@
      <Compile Include="Assets\Scripts\Player\Inventory.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
+     <Compile Include="Assets\Scripts\StunEffect.cs" />
      <Compile Include="Assets\Scripts\TestJump.cs" />
      <Compile Include="Assets\Scripts\TextHitRandom.cs" />
      <Compile Include="Assets\Scripts\UI\GroundCrack.cs" />

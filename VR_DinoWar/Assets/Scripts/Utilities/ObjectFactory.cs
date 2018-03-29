@@ -18,6 +18,7 @@ public class ObjectFactory: MonoBehaviour {
 		HitNumber,
 		TextHitRandom,
 		DeathSkull,
+		StunEffect,
 		Dino
 	}
 
@@ -28,13 +29,14 @@ public class ObjectFactory: MonoBehaviour {
 		{ PrefabType.TextHitRandom, "Prefabs/TextHitRandom" },
 		{ PrefabType.DeathSkull, "Prefabs/DeathSkull" },
 		{ PrefabType.Dino, "Prefabs/DinoFat" },
+		{ PrefabType.StunEffect, "Prefabs/StunEffect" },
 	};
 
 	public GameObject MakeObject(PrefabType type)
 	{
 		string path;
 		if (PrefabPaths.TryGetValue (type, out path)) {
-			return (Instantiate (Resources.Load (path, typeof(GameObject)) as GameObject, Spawner.instance.GetRandomSpawner(),Quaternion.identity));
+			return (Instantiate (Resources.Load (path, typeof(GameObject))) as GameObject);
 		}
 		print ("NULL");
 		return null;

@@ -15,6 +15,7 @@ public class Spawner : MonoBehaviour {
 
 		while (true) {
 			Dino dino =  ObjectPool.instance.GetDinos ();
+			dino.transform.position = transform.position;
 			dino.Live();
 
 			yield return new WaitForSeconds (Random.Range(5,10));

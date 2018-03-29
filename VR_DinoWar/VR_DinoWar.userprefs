@@ -1,24 +1,29 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\States\AttackAction.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\Inventory.cs">
     <Files>
-      <File FileName="Assets\Scripts\AI\States\StateController.cs" Line="13" Column="20" />
-      <File FileName="Assets\Scripts\Characters\Dino.cs" Line="21" Column="14" />
-      <File FileName="Assets\Scripts\Characters\Enemy.cs" Line="65" Column="6" />
-      <File FileName="Assets\Scripts\Utilities\ObjectPool.cs" Line="29" Column="67" />
-      <File FileName="Assets\Scripts\Utilities\GenericObject.cs" Line="43" Column="10" />
-      <File FileName="Assets\Scripts\Utilities\Cacheable.cs" Line="29" Column="3" />
-      <File FileName="Assets\Scripts\Spawner.cs" Line="20" Column="54" />
-      <File FileName="Assets\Scripts\Utilities\ObjectFactory.cs" Line="37" Column="139" />
-      <File FileName="Assets\Scripts\DeathSkull.cs" Line="5" Column="1" />
-      <File FileName="Assets\Scripts\Characters\FlyingDino.cs" Line="25" Column="3" />
-      <File FileName="Assets\Scripts\Player\Player.cs" Line="30" Column="2" />
-      <File FileName="Assets\Scripts\Characters\Character.cs" Line="5" Column="35" />
-      <File FileName="Assets\Scripts\AI\States\PatrolAction.cs" Line="41" Column="3" />
-      <File FileName="Assets\Scripts\AI\States\AttackAction.cs" Line="31" Column="28" />
+      <File FileName="Assets\Scripts\StunEffect.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Characters\Dino.cs" Line="12" Column="3" />
+      <File FileName="Assets\Scripts\Characters\Enemy.cs" Line="83" Column="1" />
+      <File FileName="Assets\Scripts\Utilities\ObjectPool.cs" Line="33" Column="81" />
+      <File FileName="Assets\Scripts\Utilities\GenericObject.cs" Line="28" Column="7" />
+      <File FileName="Assets\Scripts\Utilities\ObjectFactory.cs" Line="32" Column="26" />
+      <File FileName="Assets\Scripts\UI\HitNumber.cs" Line="6" Column="1" />
+      <File FileName="Assets\Scripts\DeathSkull.cs" Line="26" Column="5" />
+      <File FileName="Assets\Scripts\TextHitRandom.cs" Line="8" Column="17" />
+      <File FileName="Assets\Scripts\Characters\FlyingDino.cs" Line="9" Column="3" />
+      <File FileName="Assets\Scripts\Spawner.cs" Line="18" Column="16" />
+      <File FileName="Assets\Scripts\Player\Player.cs" Line="39" Column="3" />
+      <File FileName="Assets\Scripts\Characters\Character.cs" Line="10" Column="3" />
+      <File FileName="Assets\Scripts\AI\States\PatrolAction.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\States\AttackAction.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\AI\States\CheckAttackDecision.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\States\CheckPlayerInRadiusDecision.cs" Line="17" Column="49" />
+      <File FileName="Assets\Scripts\AI\States\CheckPlayerInRadiusDecision.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\AI\States\GoToPlayerAction.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\States\IdleAction.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Weapons\Weapon.cs" Line="119" Column="10" />
+      <File FileName="Assets\VRTK\Examples\ExampleResources\Scripts\Archery\Arrow.cs" Line="114" Column="11" />
+      <File FileName="Assets\Scripts\Player\Inventory.cs" Line="77" Column="7" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
