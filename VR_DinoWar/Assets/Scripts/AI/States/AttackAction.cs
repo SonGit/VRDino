@@ -22,7 +22,7 @@ public class AttackAction : Action {
 		controller.enemy.countAttack += Time.deltaTime;
 		if (controller.enemy.countAttack > controller.enemy.rate && !controller.enemy.isAttack) 
 		{
-			RandomAttackAnimation (controller);
+			RandomAttack (controller);
 			controller.enemy.isAttack = true;
 		}
 			
@@ -42,13 +42,15 @@ public class AttackAction : Action {
 		Debug.Log ("HIT ME");
 	}
 
-	private void RandomAttackAnimation (StateController controller)
+	private void RandomAttack (StateController controller)
 	{
 		int ranAttack = Random.Range (0,2);
 		if (ranAttack == 0) {
 			controller.enemy.animator.SetTrigger ("Attack1Trigger");
+			AudioManager.instance.PlayClip (AudioManager.SoundFX.FatDinoAttack1,controller.enemy.transform.position,0.7f);
 		} else {
 			controller.enemy.animator.SetTrigger ("Attack2Trigger");
+			AudioManager.instance.PlayClip (AudioManager.SoundFX.FatDinoAttack2,controller.enemy.transform.position,0.7f);
 		}
 	}
 		

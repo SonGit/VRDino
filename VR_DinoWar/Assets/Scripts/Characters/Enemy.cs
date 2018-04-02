@@ -32,8 +32,6 @@ public abstract class Enemy : Character {
 	public bool isJumping;
 
 	protected StateController stateController;
-	private AudioSource EnemyAudio;
-
 
 
 	public void Initialize()
@@ -43,7 +41,6 @@ public abstract class Enemy : Character {
 		stateController = this.GetComponentInChildren<StateController> ();
 		obs = this.GetComponentInChildren<NavMeshObstacle> ();
 		initialSpeed = agent.speed;
-		EnemyAudio = this.GetComponent<AudioSource> ();
 	}
 
 	protected void Loop()
@@ -58,6 +55,8 @@ public abstract class Enemy : Character {
 				stunEffect = null;
 			}
 		}
+
+
 
 //		if (agent.isOnOffMeshLink) {
 //			if (!isJumping) {
@@ -85,8 +84,6 @@ public abstract class Enemy : Character {
 			Vector3 dir = hitCollider.transform.position - collisionPoint;
 			hitReaction.Hit (hitCollider,dir.normalized * impact/6 ,collisionPoint);
 
-			EnemyAudio.Play ();
-
 			// Show hit number pop up
 			ShowHitNumber (damage);
 
@@ -95,6 +92,8 @@ public abstract class Enemy : Character {
 
 			// Play Effect 
 			HitEffect(collisionPoint);
+
+			RandomHitSound ();
 
 			print ("damage " + damage + " impact "+impact);
 		}
@@ -208,14 +207,11 @@ public abstract class Enemy : Character {
 		stateController.enabled = false;
 		obs.enabled = false;
 		agent.enabled = false;
-		//animator.SetTrigger ("DieTrigger");
-		EnemyAudio.clip = deathClip;
-		EnemyAudio.Play ();
+		RandomDieSound ();
 		DieEffect();
 		print("DIE");
 		ApplyPhysics ();
 	}
-
 
 	protected virtual void ApplyPhysics()
 	{
@@ -294,10 +290,13 @@ public abstract class Enemy : Character {
 			return;
 		
 		stunEffect = ObjectPool.instance.GetStunEffect ();
-		stunEffect.transform.position = stunEffectPosition.position;
+		stunEffect.transform.position = pos.position;
 		stunEffect.Live ();
 	}
 
+	public abstract void RandomHitSound ();
+
+	public abstract void RandomDieSound ();
 
 		
 }

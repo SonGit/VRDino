@@ -105,6 +105,8 @@
      <Compile Include="Assets\Scripts\AI\States\ReachedDestinationDecision.cs" />
      <Compile Include="Assets\Scripts\AI\States\StateController.cs" />
      <Compile Include="Assets\Scripts\AI\Waypoint.cs" />
+     <Compile Include="Assets\Scripts\Audio.cs" />
+     <Compile Include="Assets\Scripts\AudioManager.cs" />
      <Compile Include="Assets\Scripts\Characters\Character.cs" />
      <Compile Include="Assets\Scripts\Characters\Dino.cs" />
      <Compile Include="Assets\Scripts\Characters\Enemy.cs" />

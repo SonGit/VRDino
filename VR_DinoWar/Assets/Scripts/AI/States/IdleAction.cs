@@ -8,6 +8,7 @@ public class IdleAction : Action {
 	{
 		int rand = Random.Range (4,8);
 		controller.enemy.animator.SetInteger ("State", rand);
+		AudioManager.instance.PlayClip (AudioManager.SoundFX.FatDinoPee,controller.enemy.transform.position,0.5f);
 		controller.enemy.isIdleDone = false;
 		controller.enemy.LocalAvoidanceOn ();
 
@@ -16,12 +17,12 @@ public class IdleAction : Action {
 
 	public override void Act (StateController controller)
 	{
-		Idling (controller);
+		
 	}
 
 	private void Idling(StateController controller)
 	{
-
+		
 	}
 
 	private void DoneIdle(StateController controller)
@@ -29,4 +30,6 @@ public class IdleAction : Action {
 		controller.enemy.onIdleAnimDone -= DoneIdle;
 		controller.enemy.LocalAvoidanceOff ();
 	}
+		
+
 }

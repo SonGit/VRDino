@@ -628,8 +628,8 @@ ModelImporter:
     - serializedVersion: 16
       name: FatDinoIdleSmell
       takeName: Take 001
-      firstFrame: 0
-      lastFrame: 788
+      firstFrame: 433
+      lastFrame: 519
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

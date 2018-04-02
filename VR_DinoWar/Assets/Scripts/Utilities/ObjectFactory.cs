@@ -19,7 +19,8 @@ public class ObjectFactory: MonoBehaviour {
 		TextHitRandom,
 		DeathSkull,
 		StunEffect,
-		Dino
+		Dino,
+		AudioSource
 	}
 
 	public Dictionary<PrefabType,string> PrefabPaths = new Dictionary<PrefabType, string> {
@@ -30,6 +31,7 @@ public class ObjectFactory: MonoBehaviour {
 		{ PrefabType.DeathSkull, "Prefabs/DeathSkull" },
 		{ PrefabType.Dino, "Prefabs/DinoFat" },
 		{ PrefabType.StunEffect, "Prefabs/StunEffect" },
+		{ PrefabType.AudioSource, "Prefabs/AudioSource" },
 	};
 
 	public GameObject MakeObject(PrefabType type)

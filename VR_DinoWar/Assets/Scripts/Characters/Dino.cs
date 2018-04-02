@@ -6,10 +6,10 @@ using RootMotion.Dynamics;
 
 public class Dino : Enemy {
 
-
 	// Use this for initialization
 	IEnumerator Start () {
 		Initialize ();
+
 		Rigidbody[] rbs = this.GetComponentsInChildren<Rigidbody> ();
 		foreach(Rigidbody rb in rbs)
 		{
@@ -32,7 +32,6 @@ public class Dino : Enemy {
 			Stun ();
 			}
 
-
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -52,10 +51,31 @@ public class Dino : Enemy {
 		animator.enabled = false;
 	}
 
+	public override void RandomHitSound ()
+	{
+		int ranHitSound = Random.Range (0,2);
+		if (ranHitSound == 0) {
+			AudioManager.instance.PlayClip (AudioManager.SoundFX.FatDinoHit1,transform.position);
+		} else {
+			AudioManager.instance.PlayClip (AudioManager.SoundFX.FatDinoHit2,transform.position);
+		}
+	}
+
+	public override void RandomDieSound ()
+	{
+		int ranDieSound = Random.Range (0,2);
+		if (ranDieSound == 0) {
+			AudioManager.instance.PlayClip (AudioManager.SoundFX.FatDinoDie1,transform.position);
+		} else {
+			AudioManager.instance.PlayClip (AudioManager.SoundFX.FatDinoDie2,transform.position);
+		}
+	}
+
 	public override void OnLive ()
 	{
 		gameObject.SetActive (true);
 	}
+
 
 	public override void OnDestroy ()
 	{

@@ -146,6 +146,8 @@
             if (stringControl)
             {
                 stringControl.ForceRelease();
+				hasPlayedPullSound = false;
+				AudioManager.instance.PlayClip (AudioManager.SoundFX.ArrowFly,transform.position);
             }
         }
 
@@ -160,10 +162,17 @@
             transform.rotation = Quaternion.LookRotation(holdControl.transform.position - stringControl.transform.position, holdControl.transform.TransformDirection(Vector3.forward));
         }
 
+		bool hasPlayedPullSound;
         private void PullString()
         {
             currentPull = Mathf.Clamp((Vector3.Distance(holdControl.transform.position, stringControl.transform.position) - pullOffset) * pullMultiplier, 0, maxPullDistance);
             bowAnimation.SetFrame(currentPull);
+
+	
+			if (!hasPlayedPullSound) {
+				AudioManager.instance.PlayClip (AudioManager.SoundFX.LongbowPullBack01,transform.position,0.5f);
+				hasPlayedPullSound = true;
+			}
 
             if (!currentPull.ToString("F2").Equals(previousPull.ToString("F2")))
             {
@@ -171,6 +180,7 @@
                 VRTK_ControllerHaptics.TriggerHapticPulse(VRTK_ControllerReference.GetControllerReference(stringControl.gameObject), stringVibration);
             }
             previousPull = currentPull;
+
         }
     }
 }

@@ -18,6 +18,7 @@ public class ObjectPool : MonoBehaviour {
 
 	GenericObject<StunEffect> stunEffect;
 
+	GenericObject<Audio> audioS;
 
 	void Awake()
 	{
@@ -31,6 +32,7 @@ public class ObjectPool : MonoBehaviour {
 		deathSkulls = new GenericObject<DeathSkull>(ObjectFactory.PrefabType.DeathSkull,10);
 		dinos = new GenericObject<Dino>(ObjectFactory.PrefabType.Dino,10);
 		stunEffect = new GenericObject<StunEffect>(ObjectFactory.PrefabType.StunEffect,10);
+		audioS = new GenericObject<Audio>(ObjectFactory.PrefabType.AudioSource,4);
 	}
 
 	public HitNumber GetHitNumber()
@@ -56,5 +58,10 @@ public class ObjectPool : MonoBehaviour {
 	public StunEffect GetStunEffect()
 	{
 		return stunEffect.GetObj ();
+	}
+
+	public Audio GetAudioSoure()
+	{
+		return audioS.GetObj ();
 	}
 }

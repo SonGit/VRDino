@@ -18,20 +18,8 @@ public class Spawner : MonoBehaviour {
 			dino.transform.position = transform.position;
 			dino.Live();
 
-			yield return new WaitForSeconds (Random.Range(5,10));
+			yield return new WaitForSeconds (Random.Range(10,20));
 		}
-
-
-	}
-
-	public Vector3 GetRandomSpawner()
-	{
-		string tag = "Spawner";
-
-		GameObject[] SpawnerObjs = GameObject.FindGameObjectsWithTag (tag);
-		int randomSpawner = Random.Range (0,SpawnerObjs.Length);
-
-		return SpawnerObjs[randomSpawner].transform.position;
 	}
 	
 

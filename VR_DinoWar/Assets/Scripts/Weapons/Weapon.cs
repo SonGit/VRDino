@@ -43,11 +43,21 @@ public class Weapon : VRTK_InteractableObject {
 		} 
 	}
 
+	public AudioSource whoosh;
 	// Put this in FixedUpdate()
 	protected void CalculateVelocity()
 	{
 		velocity = ((weaponTip.position - previous).magnitude) / Time.deltaTime;
+
 		previous = weaponTip.position;
+
+		if (whoosh != null) {
+			if (VRTK_ControllerReference.IsValid(controllerReference) && IsGrabbed() && velocity > 8)
+			{
+				if (!whoosh.isPlaying)
+					whoosh.Play ();
+			}
+		}
 	}
 
 	// when weapon is thrown
@@ -108,6 +118,8 @@ public class Weapon : VRTK_InteractableObject {
 			var hapticStrength = collisionForce / maxCollisionForce;
 			VRTK_ControllerHaptics.TriggerHapticPulse(controllerReference, hapticStrength, 0.5f, 0.01f);
 			CheckIfEnemyAndDealDamage (collision,collision.contacts[0].point,velocity);
+
+			AudioManager.instance.PlayClip (AudioManager.SoundFX.Impact,transform.position);
 		}
 	}
 		

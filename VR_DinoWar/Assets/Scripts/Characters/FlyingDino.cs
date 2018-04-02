@@ -14,6 +14,16 @@ public class FlyingDino : Enemy {
 		Loop ();
 	}
 
+	public override void RandomHitSound ()
+	{
+		
+	}
+
+	public override void RandomDieSound ()
+	{
+		
+	}
+
 	public override void OnLive ()
 	{
 
