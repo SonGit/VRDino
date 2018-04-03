@@ -7,7 +7,7 @@ public class GoToPlayerAction : Action {
 	
 	public override void Init (StateController controller)
 	{
-		controller.enemy.animator.SetInteger ("State", 1);
+
 		controller.enemy.LocalAvoidanceOff ();
 	}
 
@@ -18,6 +18,7 @@ public class GoToPlayerAction : Action {
 
 	private void GoToPlayer(StateController controller)
 	{
+		controller.enemy.animator.SetInteger ("State", 1);
 
 		float distanceToPlayer = Vector3.Distance(controller.transform.position,controller.playerReference.transform.position);
 

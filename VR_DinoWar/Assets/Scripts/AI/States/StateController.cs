@@ -8,6 +8,7 @@ public class StateController : MonoBehaviour {
 	public State currentState;
 	public State lastState;
 	public State remainInState;
+	public State defaultState;
 	public  bool AIEnabled;
 
 	[HideInInspector] public float minimumRange = 3.5f;
@@ -18,6 +19,7 @@ public class StateController : MonoBehaviour {
 	void Start () {
 		playerReference = Player.instance;
 		enemy = transform.root.GetComponent<Enemy> ();
+		defaultState = currentState;
 	}
 	
 	// Update is called once per frame
@@ -53,4 +55,14 @@ public class StateController : MonoBehaviour {
 		currentState.InitState (this);
 	}
 
+	public void Default()
+	{
+		AIEnabled = true;
+
+		if(defaultState  == null)
+			defaultState = currentState;
+		
+		currentState = defaultState;
+		currentState.InitState (this);
+	}
 }

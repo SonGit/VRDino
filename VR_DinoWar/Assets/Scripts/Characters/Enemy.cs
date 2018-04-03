@@ -21,14 +21,14 @@ public abstract class Enemy : Character {
 	public float countAttack;
 	public float rate;
 	public bool isAttack;
-	public AudioClip deathClip;
+
+	public AudioSource footstepSFX;
 
 	[HideInInspector] public Animator animator;
 	[HideInInspector] public NavMeshAgent agent;
 	[HideInInspector] public float initialSpeed; 
 	[HideInInspector] public NavMeshObstacle obs;
 	[HideInInspector] public bool isIdleDone;
-
 
 	public delegate void OnIdleAnimOverEvent (StateController controller);
 	public OnIdleAnimOverEvent onIdleAnimDone;
@@ -40,8 +40,6 @@ public abstract class Enemy : Character {
 
 	protected StateController stateController;
 
-
-
 	public void Initialize()
 	{
 		animator = this.GetComponent<Animator> ();
@@ -49,6 +47,22 @@ public abstract class Enemy : Character {
 		stateController = this.GetComponentInChildren<StateController> ();
 		obs = this.GetComponentInChildren<NavMeshObstacle> ();
 		initialSpeed = agent.speed;
+
+		animator.enabled = true;
+		stateController.enabled = true;
+		agent.enabled = true;
+		bodyIK.enabled = true;
+		stateController.Default ();
+
+		obs.enabled = false;
+		hitPoints = 100;
+
+		Rigidbody[] rbs = this.GetComponentsInChildren<Rigidbody> ();
+		foreach(Rigidbody rb in rbs)
+		{
+			rb.useGravity = false;
+			rb.isKinematic = false;
+		}
 	}
 
 	protected void Loop()
@@ -64,6 +78,16 @@ public abstract class Enemy : Character {
 			}
 		}
 
+
+		print (agent.velocity.magnitude);
+
+		if (agent.velocity.magnitude > 0) {
+			if (!footstepSFX.isPlaying)
+				footstepSFX.Play ();
+		} else {
+			if (footstepSFX.isPlaying)
+				footstepSFX.Stop ();
+		}
 
 
 //		if (agent.isOnOffMeshLink) {
@@ -211,7 +235,7 @@ public abstract class Enemy : Character {
 		
 	protected override void Die()
 	{
-		Player.instance.enemyNo--;
+		Player.instance.ReduceEngagedEnemy ();
 		stateController.enabled = false;
 		obs.enabled = false;
 		agent.enabled = false;
@@ -224,7 +248,8 @@ public abstract class Enemy : Character {
 
 	IEnumerator WaitDestroy()
 	{
-		yield return new WaitForSeconds (5);
+		yield return new WaitForSeconds (2);
+		gameObject.SetActive (false);
 		Destroy ();
 	}
 
@@ -312,6 +337,11 @@ public abstract class Enemy : Character {
 	public abstract void RandomHitSound ();
 
 	public abstract void RandomDieSound ();
+
+	protected virtual void Default()
+	{
+
+	}
 
 		
 }

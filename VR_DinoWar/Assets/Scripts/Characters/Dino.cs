@@ -8,16 +8,7 @@ public class Dino : Enemy {
 
 	// Use this for initialization
 	IEnumerator Start () {
-		Initialize ();
 
-		Rigidbody[] rbs = this.GetComponentsInChildren<Rigidbody> ();
-		foreach(Rigidbody rb in rbs)
-		{
-			rb.useGravity = false;
-			rb.isKinematic = false;
-		}
-			
-		Destroy ();
 
 		yield return new WaitForSeconds (1);
 	}
@@ -78,6 +69,7 @@ public class Dino : Enemy {
 	public override void OnLive ()
 	{
 		gameObject.SetActive (true);
+		Initialize ();
 	}
 
 

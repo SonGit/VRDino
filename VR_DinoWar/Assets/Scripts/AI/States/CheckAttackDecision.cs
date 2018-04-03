@@ -15,10 +15,10 @@ public class CheckAttackDecision : Decision {
 		if (controller.playerReference == null)
 			return false;
 
-		if (controller.playerReference.enemyNo < Utility.MAX_ATTK_ENEMY) {
+		if (controller.playerReference.GetCurrentEngagedEnemy() < Utility.MAX_ATTK_ENEMY) {
 
-			if(Player.instance.enemyNo < Utility.MAX_ATTK_ENEMY)
-				Player.instance.enemyNo++;
+			if(Player.instance.GetCurrentEngagedEnemy() < Utility.MAX_ATTK_ENEMY)
+				Player.instance.IncreaseEngagedEnemy();
 			
 			return true;
 

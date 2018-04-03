@@ -38,4 +38,25 @@ public class Player : Character {
 
 	}
 
+	public void ReduceEngagedEnemy()
+	{
+		enemyNo--;
+
+		if (enemyNo < 0)
+			enemyNo = 0;
+	}
+
+	public void IncreaseEngagedEnemy()
+	{
+		enemyNo++;
+
+		if (enemyNo > Utility.MAX_ATTK_ENEMY)
+			enemyNo = Utility.MAX_ATTK_ENEMY;
+	}
+
+	public int GetCurrentEngagedEnemy()
+	{
+		return enemyNo;
+	}
+
 }
