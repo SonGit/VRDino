@@ -7,13 +7,10 @@ public class TutorialMenu : MonoBehaviour {
 	RectTransform container;
 	Canvas canvas;
 	// Use this for initialization
-	IEnumerator Start () {
+	void Start () {
 		container = this.GetComponent<RectTransform> ();
 		canvas = this.GetComponent<Canvas> ();
 		DisableCanvas ();
-		Show ();
-
-		yield return new WaitForSeconds (2);
 	}
 	
 	// Update is called once per frame
