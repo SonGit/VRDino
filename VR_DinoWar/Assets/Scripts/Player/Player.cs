@@ -39,6 +39,11 @@ public class Player : Character {
 
 	}
 
+	public void StartGame()
+	{
+
+	}
+
 	public void ReduceEngagedEnemy()
 	{
 		enemyNo--;

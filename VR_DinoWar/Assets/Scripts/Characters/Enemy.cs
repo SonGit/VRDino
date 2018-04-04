@@ -181,7 +181,7 @@ public abstract class Enemy : Character {
 		//onEndAttackAnim (stateController);
 
 		distance = Vector3.Distance(transform.position,stateController.playerReference.transform.position);
-		if (distance < Utility.MAX_ATTK_DISTANCE_PLAYER) 
+		if (distance < 5) 
 		{
 			Player.instance.OnHit (20);
 		}
