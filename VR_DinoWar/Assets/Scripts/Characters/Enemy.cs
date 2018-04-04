@@ -55,7 +55,7 @@ public abstract class Enemy : Character {
 		stateController.Default ();
 
 		obs.enabled = false;
-		hitPoints = 100;
+		hitPoints = 250;
 
 		Rigidbody[] rbs = this.GetComponentsInChildren<Rigidbody> ();
 		foreach(Rigidbody rb in rbs)
@@ -77,9 +77,6 @@ public abstract class Enemy : Character {
 				stunEffect = null;
 			}
 		}
-
-
-		print (agent.velocity.magnitude);
 
 		if (agent.velocity.magnitude > 0) {
 			if (!footstepSFX.isPlaying)
@@ -248,7 +245,7 @@ public abstract class Enemy : Character {
 
 	IEnumerator WaitDestroy()
 	{
-		yield return new WaitForSeconds (2);
+		yield return new WaitForSeconds (15);
 		gameObject.SetActive (false);
 		Destroy ();
 	}

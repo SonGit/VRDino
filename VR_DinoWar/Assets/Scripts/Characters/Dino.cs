@@ -9,7 +9,8 @@ public class Dino : Enemy {
 	// Use this for initialization
 	IEnumerator Start () {
 
-
+		gameObject.SetActive (false);
+		Destroy ();
 		yield return new WaitForSeconds (1);
 	}
 		
@@ -26,6 +27,8 @@ public class Dino : Enemy {
 		{
 			OnHit (1000);
 		}
+
+
 
 	}
 

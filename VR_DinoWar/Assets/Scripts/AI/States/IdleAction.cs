@@ -10,8 +10,8 @@ public class IdleAction : Action {
 		controller.enemy.animator.SetInteger ("State", rand);
 		AudioManager.instance.PlayClip (AudioManager.SoundFX.FatDinoPee,controller.enemy.transform.position,0.5f);
 		controller.enemy.isIdleDone = false;
-		controller.enemy.LocalAvoidanceOn ();
-
+	//	controller.enemy.LocalAvoidanceOn ();
+		controller.enemy.FaceTarget(controller.playerReference.transform.position);
 		controller.enemy.onIdleAnimDone += DoneIdle;
 	}
 

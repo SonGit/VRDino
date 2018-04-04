@@ -14,12 +14,17 @@ public class Spawner : MonoBehaviour {
 	public Transform[] spawnPoints;
 		
 	public void SpawnEnemy () {
+		StartCoroutine (Spawn());
+	}	
+
+	IEnumerator Spawn()
+	{
 		Transform randSpawnPoints = spawnPoints [Random.Range (0, spawnPoints.Length)];
 
 		Dino dino =  ObjectPool.instance.GetDinos ();
+		yield return new WaitForSeconds (.5f);
 		dino.transform.position = randSpawnPoints.position;
-		dino.transform.rotation = randSpawnPoints.rotation;
 		dino.Live ();
-	}		
+	}
 
 }
