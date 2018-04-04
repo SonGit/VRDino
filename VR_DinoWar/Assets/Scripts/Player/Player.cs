@@ -7,6 +7,7 @@ public class Player : Character {
 	public static Player instance;
 
 	public int enemyNo = 0;
+	[HideInInspector] public int score;
 
 	void Awake()
 	{
