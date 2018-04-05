@@ -3514,6 +3514,7 @@ MonoBehaviour:
   bodyIK: {fileID: 114133597000081044}
   puppet: {fileID: 4002488380555402}
   stunEffectPosition: {fileID: 4324560138169140}
+  smokeEffectPosition: {fileID: 4837364472322142}
   countAttack: 0
   rate: 3
   isAttack: 0

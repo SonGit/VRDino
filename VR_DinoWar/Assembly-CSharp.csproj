@@ -107,6 +107,7 @@
      <Compile Include="Assets\Scripts\AI\Waypoint.cs" />
      <Compile Include="Assets\Scripts\Audio.cs" />
      <Compile Include="Assets\Scripts\AudioManager.cs" />
+     <Compile Include="Assets\Scripts\BoardManager.cs" />
      <Compile Include="Assets\Scripts\Characters\Character.cs" />
      <Compile Include="Assets\Scripts\Characters\Dino.cs" />
      <Compile Include="Assets\Scripts\Characters\Enemy.cs" />
@@ -115,12 +116,20 @@
      <Compile Include="Assets\Scripts\ParticleLifetime.cs" />
      <Compile Include="Assets\Scripts\Player\Inventory.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />
+     <Compile Include="Assets\Scripts\ScoreManager.cs" />
+     <Compile Include="Assets\Scripts\SmokeEffect.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
      <Compile Include="Assets\Scripts\StunEffect.cs" />
      <Compile Include="Assets\Scripts\TestJump.cs" />
      <Compile Include="Assets\Scripts\TextHitRandom.cs" />
+     <Compile Include="Assets\Scripts\UI\BaseMenu.cs" />
+     <Compile Include="Assets\Scripts\UI\GameOverMenu.cs" />
      <Compile Include="Assets\Scripts\UI\GroundCrack.cs" />
      <Compile Include="Assets\Scripts\UI\HitNumber.cs" />
+     <Compile Include="Assets\Scripts\UI\HPBar.cs" />
+     <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuManager.cs" />
+     <Compile Include="Assets\Scripts\UI\TutorialMenu.cs" />
      <Compile Include="Assets\Scripts\Utilities\Cacheable.cs" />
      <Compile Include="Assets\Scripts\Utilities\GenericObject.cs" />
      <Compile Include="Assets\Scripts\Utilities\ObjectFactory.cs" />
@@ -401,6 +410,7 @@
      <None Include="Assets\VRTK\Scripts\Internal\Shaders\AdaptiveQualityDebugVisualization.shader" />
      <None Include="Assets\Resources\JMO Assets\Cartoon FX\Shaders\CFX2 Particle Alpha Blend Add.shader" />
      <None Include="Assets\Resources\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
+     <None Include="Assets\Resources\NoOverlayZTest.shader" />
      <None Include="Assets\Resources\JMO Assets\!JMO Assets Readme.txt" />
      <None Include="Assets\Resources\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_WaterWiggle.shader" />
      <None Include="Assets\Resources\JMO Assets\Cartoon FX\Shaders\CFX2 Particle Alpha Blend Tint.shader" />
@@ -438,10 +448,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.3-1.0.56-Editor">
- <HintPath>D:/Unity/Project New/VR_DinoWar/Assets/Plugins/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-1.0.56-Editor.dll</HintPath>
+ <HintPath>D:/Unity/Project New 2/VR_DinoWar/Assets/Plugins/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-1.0.56-Editor.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.3-1.0.56-Runtime">
- <HintPath>D:/Unity/Project New/VR_DinoWar/Assets/Plugins/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-1.0.56-Runtime.dll</HintPath>
+ <HintPath>D:/Unity/Project New 2/VR_DinoWar/Assets/Plugins/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-1.0.56-Runtime.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/ProgramData/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

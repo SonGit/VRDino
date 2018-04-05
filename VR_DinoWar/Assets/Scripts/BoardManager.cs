@@ -13,9 +13,11 @@ public class BoardManager : MonoBehaviour {
 	}
 		
 
-	public TextMeshPro messageTextProScore;
+	public TextMeshPro messageTextProCurrentScore;
 	public TextMeshPro messageTextProEnemyIsAlive;
 	public TextMeshPro messageTextProCureentWave;
+	public TextMeshProUGUI messageTextProWaveClear;
+	public TextMeshProUGUI messageTextProTotalScore;
 
 	private string message;
 
@@ -34,13 +36,19 @@ public class BoardManager : MonoBehaviour {
 	private void ShowMessage ()
 	{
 		message = EndMessageScore ();
-		messageTextProScore.text = message;
+		messageTextProCurrentScore.text = message;
 
 		message = EndMessageEnemyIsAlive ();
 		messageTextProEnemyIsAlive.text = message;
 
 		message = EndMessageCurrentWave ();
 		messageTextProCureentWave.text = message;
+
+		message = EndMessageWaveClear ();
+		messageTextProWaveClear.text = message;
+
+		message = EndMessageTotalScore ();
+		messageTextProTotalScore.text = message;
 	}
 
 	private string EndMessageScore()
@@ -58,6 +66,18 @@ public class BoardManager : MonoBehaviour {
 	private string EndMessageEnemyIsAlive()
 	{
 		message = "IsAlive: " + WaveManager.instance.GetEnemyIsAlive ();
+		return message;
+	}
+
+	private string EndMessageWaveClear()
+	{
+		message = "WAVE CLEARED: " + WaveManager.instance.CountWave ();
+		return message;
+	}
+
+	private string EndMessageTotalScore()
+	{
+		message = "TOTAL SCORE: " + Player.instance.score;
 		return message;
 	}
 		

@@ -22,7 +22,6 @@ public abstract class BaseMenu : MonoBehaviour {
 
 	public virtual void Show()
 	{
-		Time.timeScale = 0;
 		EnableCanvas ();
 		ShowEffect ();
 	}
@@ -34,10 +33,11 @@ public abstract class BaseMenu : MonoBehaviour {
 
 	protected virtual void ShowEffect ()
 	{
-		container.transform.position = new Vector3 (-23,17,-37.5f);
-		iTween.MoveTo(gameObject,iTween.Hash("x", .25, "easetype", iTween.EaseType.easeInSine, "time", .2, "ignoretimescale", true));
-
-
+		container.transform.position = new Vector3 (-23f,17.5f,-37.25f);
+		iTween.MoveBy(gameObject,iTween.Hash(
+			"y"   , -5.25f,
+			"time", 1.5f
+		));
 	}
 
 	protected virtual void HideEffect ()

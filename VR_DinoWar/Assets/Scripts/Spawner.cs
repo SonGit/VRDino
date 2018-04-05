@@ -25,6 +25,7 @@ public class Spawner : MonoBehaviour {
 		yield return new WaitForSeconds (.5f);
 		dino.transform.position = randSpawnPoints.position;
 		dino.Live ();
+		WaveManager.instance.isAliveList.Add(dino);
 	}
 
 }

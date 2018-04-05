@@ -6,13 +6,6 @@ using RootMotion.Dynamics;
 using RootMotion.FinalIK;
 
 public abstract class Enemy : Character {
-	
-	public static Enemy instance;
-
-	private void Awake()
-	{
-		instance = this;
-	}
 
 	public HitReaction hitReaction;
 	public FullBodyBipedIK bodyIK;
@@ -40,6 +33,8 @@ public abstract class Enemy : Character {
 	public bool isJumping;
 
 	protected StateController stateController;
+
+
 
 	public void Initialize()
 	{
@@ -115,6 +110,7 @@ public abstract class Enemy : Character {
 			hitReaction.Hit (hitCollider,dir.normalized * impact/6 ,collisionPoint);
 
 			// Show hit number pop up
+			if(hitPoints > 0)
 			ShowHitNumber (damage);
 
 			// Calculate damage
@@ -183,7 +179,7 @@ public abstract class Enemy : Character {
 		distance = Vector3.Distance(transform.position,stateController.playerReference.transform.position);
 		if (distance < 5) 
 		{
-			Player.instance.OnHit (20);
+			Player.instance.OnHit (100);
 		}
 
 		isAttack = false;
@@ -197,7 +193,11 @@ public abstract class Enemy : Character {
 		onIdleAnimDone (stateController);
 	}
 
-
+	IEnumerator WaitAnimationCheer ()
+	{
+		yield return new WaitForSeconds (1);
+		animator.SetInteger ("State", 5);
+	}
 
 	//Force enemy to follow a pre-defined path 
 	public void Pathing()
@@ -339,6 +339,13 @@ public abstract class Enemy : Character {
 		SmokeEffect smokeEffect = ObjectPool.instance.GetSmokeEffect ();
 		smokeEffect.transform.position = pos.position;
 		smokeEffect.Live ();
+	}
+
+	public void CheerWorlds ()
+	{
+		animator.SetTrigger ("CheerTrigger");
+		stateController.AIEnabled = false;
+		agent.enabled = false;
 	}
 
 	public abstract void RandomHitSound ();

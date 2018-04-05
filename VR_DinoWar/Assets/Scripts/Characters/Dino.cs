@@ -23,7 +23,7 @@ public class Dino : Enemy {
 			Stun ();
 			}
 
-		if (Input.GetKeyDown (KeyCode.D) && _living) 
+		if (Input.GetKeyDown (KeyCode.I) && _living) 
 		{
 			OnHit (1000);
 		}

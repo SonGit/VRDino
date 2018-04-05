@@ -5,6 +5,13 @@ using VRTK;
 
 public class Inventory : MonoBehaviour {
 
+	public static Inventory instance;
+
+	void Awake()
+	{
+		instance = this;
+	}
+
 	public GameObject clubPrefab;
 	public GameObject spearPrefab;
 	public GameObject bowPrefab;
@@ -74,7 +81,7 @@ public class Inventory : MonoBehaviour {
 
 	}
 
-	bool Drop(bool isRightHand,GameObject prefab)
+	 bool Drop(bool isRightHand,GameObject prefab)
 	{
 		GameObject grabbedObj;
 		if (isRightHand) {
@@ -117,5 +124,11 @@ public class Inventory : MonoBehaviour {
 		}
 
 		return false;
+	}
+
+	public void DropAllWeapon ()
+	{
+		RightHandGrab.ForceRelease ();
+		LeftHandGrab.ForceRelease ();
 	}
 }

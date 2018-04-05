@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameOverMenu : TutorialMenu {
+public class GameOverMenu : BaseMenu {
 
-	IEnumerator Start () {
-		container = this.GetComponent<RectTransform> ();
-		canvas = this.GetComponent<Canvas> ();
+	public static GameOverMenu instance;
+
+	void Awake()
+	{
+		instance = this;
+	}
+
+	void Start () {
+		Init ();
 		DisableCanvas ();
-		Show ();
+	}
 
-		yield return new WaitForSeconds (2);
+	public override void Show()
+	{
+		base.Show ();
 	}
 }

@@ -51,6 +51,43 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_AnimateCurvedFillOnStart.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_CameraController.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_CameraRotationOnButtonHeld.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_ChangeValueOnHold.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_ControllerHandSwitcher.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_DragBetweenCanvases.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_draggable.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_GunController.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_GunMovement.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_inventory_paralax.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_MoveAlong.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_MoveHeartbeat.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_OrientOnCurvedSpace.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_PerlinNoisePosition.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_PerlinNoiseRotation.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_PickImageFromSet.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_RaycastToCanvas.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_RiseChildrenOverTime.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_rotation_anim.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_ShowParentCoordinates.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_TMPChecker.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_touchpad.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_ViveButtonState.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_ViveHapticPulse.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_ViveLaserBeam.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_WorldSpaceCursorFollow.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_WorldSpaceMouseMultipleCanvases.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\CUI_ZChangeOnHover.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Scripts\CurvedUIInputFieldCaret.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Scripts\CurvedUIInputModule.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Scripts\CurvedUIPointerEventData.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Scripts\CurvedUIRaycaster.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Scripts\CurvedUISettings.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Scripts\CurvedUIVertexEffect.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Scripts\CurvedUIViveController.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Scripts\Experimental\CurvedUITMP.cs" />
+     <Compile Include="Assets\Plugins\CurvedUI\Scripts\Experimental\CurvedUITMPSubmesh.cs" />
      <Compile Include="Assets\Plugins\Lava_Flowing_Shader\Scripts\ScrollingUVs_Layers.cs" />
      <Compile Include="Assets\Plugins\Pixelplacement\iTween\iTween.cs" />
      <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\MoveSample.cs" />
@@ -417,6 +454,7 @@
      <None Include="Assets\Plugins\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\Plugins\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_Fade.shader" />
+     <None Include="Assets\Plugins\CurvedUI\Demo Scenes\Demo Scenes Content\OverlayBlend.shader" />
      <None Include="Assets\Plugins\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
      <None Include="Assets\Plugins\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
      <None Include="Assets\Plugins\PostProcessing\Resources\Shaders\Fog.shader" />
@@ -478,6 +516,7 @@
      <None Include="Assets\Plugins\PostProcessing\Resources\Shaders\DepthOfField.cginc" />
      <None Include="Assets\Plugins\PostProcessing\Resources\Shaders\ScreenSpaceRaytrace.cginc" />
      <None Include="Assets\Plugins\PostProcessing\Resources\Shaders\Bloom.shader" />
+     <None Include="Assets\Plugins\CurvedUI\Shaders and Materials\UIAlwaysOnTop.shader" />
      <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_SphericalProjection.shader" />
      <None Include="Assets\Plugins\SteamVR\Resources\SteamVR_AlphaOut.shader" />
      <None Include="Assets\Plugins\SteamVR\readme.txt" />
@@ -518,10 +557,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.3-1.0.56-Editor">
- <HintPath>D:/Unity/Project New/VR_DinoWar/Assets/Plugins/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-1.0.56-Editor.dll</HintPath>
+ <HintPath>D:/Unity/Project New 2/VR_DinoWar/Assets/Plugins/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-1.0.56-Editor.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.3-1.0.56-Runtime">
- <HintPath>D:/Unity/Project New/VR_DinoWar/Assets/Plugins/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-1.0.56-Runtime.dll</HintPath>
+ <HintPath>D:/Unity/Project New 2/VR_DinoWar/Assets/Plugins/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-1.0.56-Runtime.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/ProgramData/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

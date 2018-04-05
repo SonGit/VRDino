@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour 
 {
+
+	public static WaveManager instance;
+
+	void Awake()
+	{
+		instance = this;
+	}
+
+	[HideInInspector] public List<Dino> isAliveList = new List<Dino>();
+
+
 	public enum SpawnState
 	{
 		Spawning,
@@ -22,12 +33,14 @@ public class WaveManager : MonoBehaviour
 
 	public Wave[] waves;
 	public float timeBetweenWaves = 5f;
+	public float timeResetWaves = 15f;
 	public float waveCountDown;
 	public SpawnState state = SpawnState.Counting;
 
 
 	private int nextWave = 0;
 	private float searchCountdown = 1f;
+	private int countWave;
 
 	void Start ()
 	{
@@ -89,10 +102,13 @@ public class WaveManager : MonoBehaviour
 		else 
 		{
 			Debug.Log (waves[nextWave].name + " Complete!" );
+			countWave++;
+			isAliveList = new List<Dino>();
 			nextWave++;
 		}
 		
 	}
+
 
 	IEnumerator SpawnWave (Wave wave)
 	{
@@ -110,5 +126,71 @@ public class WaveManager : MonoBehaviour
 	void SpawnEnemy ()
 	{
 		Spawner.instance.SpawnEnemy ();
+	}
+
+	public string GetCurrentWave ()
+	{
+		return waves [nextWave].name;
+	}
+
+	public void ResetWave ()
+	{
+		state = SpawnState.Counting;
+		isAliveList = new List<Dino>();
+		waveCountDown = timeResetWaves;
+		nextWave = 0;
+		countWave = 0;
+	}
+
+	public int GetEnemyIsAlive ()
+	{
+		int enemyCount = 0;
+		foreach (Dino item in isAliveList) 
+		{
+			if (item.hitPoints > 0) 
+			{
+				enemyCount++;
+			} 
+		}
+		return enemyCount;
+	}
+
+	public void GetEnemyCheerWorlds()
+	{
+		foreach (Dino item in isAliveList) 
+		{
+			if (item.hitPoints > 0) 
+			{
+				item.CheerWorlds ();
+			} 
+		}
+	}
+
+	public void ResetEnemy()
+	{
+		foreach (Dino item in isAliveList) 
+		{
+			if (item.hitPoints > 0) 
+			{
+				item.OnHit (500);
+			} 
+		}
+	}
+
+	public int CountWave ()
+	{
+		return countWave;
+	}
+
+	public bool CheckEnemyIsDie ()
+	{
+		foreach (Dino item in isAliveList) 
+		{
+			if (item.hitPoints <= 0) 
+			{
+				return true;
+			} 
+		}
+		return false;
 	}
 }
