@@ -18,6 +18,7 @@ public abstract class Enemy : Character {
 	public FullBodyBipedIK bodyIK;
 	public Transform puppet;
 	public Transform stunEffectPosition;
+	public Transform smokeEffectPosition;
 	public float countAttack;
 	public float rate;
 	public bool isAttack;
@@ -233,6 +234,7 @@ public abstract class Enemy : Character {
 	protected override void Die()
 	{
 		Player.instance.ReduceEngagedEnemy ();
+		ScoreManager.instance.GetScore (10);
 		stateController.enabled = false;
 		obs.enabled = false;
 		agent.enabled = false;
@@ -247,6 +249,7 @@ public abstract class Enemy : Character {
 	{
 		yield return new WaitForSeconds (15);
 		gameObject.SetActive (false);
+		SmokeEffect (smokeEffectPosition);
 		Destroy ();
 	}
 
@@ -329,6 +332,13 @@ public abstract class Enemy : Character {
 		stunEffect = ObjectPool.instance.GetStunEffect ();
 		stunEffect.transform.position = pos.position;
 		stunEffect.Live ();
+	}
+
+	protected void SmokeEffect(Transform pos)
+	{
+		SmokeEffect smokeEffect = ObjectPool.instance.GetSmokeEffect ();
+		smokeEffect.transform.position = pos.position;
+		smokeEffect.Live ();
 	}
 
 	public abstract void RandomHitSound ();
