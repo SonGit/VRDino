@@ -32,6 +32,7 @@ public class AudioManager : MonoBehaviour
 			{ SoundFX.Impact, Resources.Load<AudioClip>("Sounds/Effects/Impact") },
 			{ SoundFX.Whoosh, Resources.Load<AudioClip>("Sounds/Effects/Whoosh") },
 			{ SoundFX.LongbowPullBack01, Resources.Load<AudioClip>("Sounds/Effects/LongbowPullBack01") },
+			{ SoundFX.ArrowNock, Resources.Load<AudioClip>("Sounds/Effects/ArrowNock03") },
 			//{ SoundFX.Whoosh, Resources.Load<AudioClip>("Sounds/Effects/Whoosh") },
 		};
 
@@ -56,6 +57,7 @@ public class AudioManager : MonoBehaviour
 		Impact,
 		Whoosh,
 		LongbowPullBack01,
+		ArrowNock
 	}
 
 	public void PlayClip(SoundFX soundFX,Vector3 worldPos,float volume = 1)
