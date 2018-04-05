@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TutorialMenu : MonoBehaviour {
 
-	RectTransform container;
-	Canvas canvas;
+	protected RectTransform container;
+	protected Canvas canvas;
 	// Use this for initialization
 	IEnumerator Start () {
 		container = this.GetComponent<RectTransform> ();
@@ -43,13 +43,13 @@ public class TutorialMenu : MonoBehaviour {
 		));
 	}
 		
-	void EnableCanvas()
+	protected void EnableCanvas()
 	{
 		if (canvas != null)
 			canvas.enabled = true;
 	}
 
-	void DisableCanvas()
+	protected void DisableCanvas()
 	{
 		if (canvas != null)
 			canvas.enabled = false;
