@@ -30,7 +30,7 @@ public class ObjectPool : MonoBehaviour {
 		hitNumbers = new GenericObject<HitNumber>(ObjectFactory.PrefabType.HitNumber,10);
 		textHitRandoms = new GenericObject<TextHitRandom>(ObjectFactory.PrefabType.TextHitRandom,10);
 		deathSkulls = new GenericObject<DeathSkull>(ObjectFactory.PrefabType.DeathSkull,10);
-		dinos = new GenericObject<Dino>(ObjectFactory.PrefabType.Dino,10);
+		dinos = new GenericObject<Dino>(ObjectFactory.PrefabType.Dino,15);
 		stunEffect = new GenericObject<StunEffect>(ObjectFactory.PrefabType.StunEffect,10);
 		audioS = new GenericObject<Audio>(ObjectFactory.PrefabType.AudioSource,4);
 	}

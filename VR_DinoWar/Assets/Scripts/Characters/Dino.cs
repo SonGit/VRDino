@@ -16,8 +16,7 @@ public class Dino : Enemy {
 			rb.useGravity = false;
 			rb.isKinematic = false;
 		}
-
-		gameObject.SetActive (false);
+			
 		Destroy ();
 
 		yield return new WaitForSeconds (1);
@@ -31,6 +30,11 @@ public class Dino : Enemy {
 			{
 			Stun ();
 			}
+
+		if (Input.GetKeyDown (KeyCode.D) && _living) 
+		{
+			OnHit (1000);
+		}
 
 	}
 
@@ -79,7 +83,7 @@ public class Dino : Enemy {
 
 	public override void OnDestroy ()
 	{
-		
+		gameObject.SetActive (false);
 	}
 
 }

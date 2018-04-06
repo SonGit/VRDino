@@ -18,7 +18,10 @@ public abstract class Character : Cacheable {
 
 	protected virtual void Die()
 	{
+		
 
 	}
+
+
 
 }

@@ -6,6 +6,13 @@ using RootMotion.Dynamics;
 using RootMotion.FinalIK;
 
 public abstract class Enemy : Character {
+	
+	public static Enemy instance;
+
+	private void Awake()
+	{
+		instance = this;
+	}
 
 	public HitReaction hitReaction;
 	public FullBodyBipedIK bodyIK;
@@ -32,6 +39,7 @@ public abstract class Enemy : Character {
 	public bool isJumping;
 
 	protected StateController stateController;
+
 
 
 	public void Initialize()
@@ -211,6 +219,13 @@ public abstract class Enemy : Character {
 		DieEffect();
 		print("DIE");
 		ApplyPhysics ();
+		StartCoroutine(WaitDestroy ());
+	}
+
+	IEnumerator WaitDestroy()
+	{
+		yield return new WaitForSeconds (5);
+		Destroy ();
 	}
 
 	protected virtual void ApplyPhysics()

@@ -126,6 +126,7 @@
      <Compile Include="Assets\Scripts\Utilities\ObjectFactory.cs" />
      <Compile Include="Assets\Scripts\Utilities\ObjectPool.cs" />
      <Compile Include="Assets\Scripts\Utilities\Utility.cs" />
+     <Compile Include="Assets\Scripts\WaveManager.cs" />
      <Compile Include="Assets\Scripts\Weapons\Bow.cs" />
      <Compile Include="Assets\Scripts\Weapons\Club.cs" />
      <Compile Include="Assets\Scripts\Weapons\Grenade.cs" />

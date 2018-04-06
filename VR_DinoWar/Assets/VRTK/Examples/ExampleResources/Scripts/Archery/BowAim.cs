@@ -147,14 +147,21 @@
             {
                 stringControl.ForceRelease();
 				hasPlayedPullSound = false;
+				isArrowNockSound = false;
 				AudioManager.instance.PlayClip (AudioManager.SoundFX.ArrowFly,transform.position);
             }
         }
 
+		bool isArrowNockSound;
         private void AimArrow()
         {
             currentArrow.transform.localPosition = Vector3.zero;
             currentArrow.transform.LookAt(handle.nockSide.position);
+			if (!isArrowNockSound) {
+				AudioManager.instance.PlayClip (AudioManager.SoundFX.ArrowNock,transform.position);
+				isArrowNockSound = true;
+			}
+
         }
 
         private void AimBow()
@@ -169,7 +176,7 @@
             bowAnimation.SetFrame(currentPull);
 
 	
-			if (!hasPlayedPullSound) {
+			if (!hasPlayedPullSound && currentPull > 0.35f) {
 				AudioManager.instance.PlayClip (AudioManager.SoundFX.LongbowPullBack01,transform.position,0.5f);
 				hasPlayedPullSound = true;
 			}
