@@ -12,7 +12,7 @@ public class WaveManager : MonoBehaviour
 		instance = this;
 	}
 
-	[HideInInspector] public List<Dino> isAliveList = new List<Dino>();
+	[HideInInspector] public List<Dino> enemyList = new List<Dino>();
 
 
 	public enum SpawnState
@@ -33,7 +33,7 @@ public class WaveManager : MonoBehaviour
 
 	public Wave[] waves;
 	public float timeBetweenWaves = 5f;
-	public float timeResetWaves = 15f;
+	public float timeResetWaves = 10f;
 	public float waveCountDown;
 	public SpawnState state = SpawnState.Counting;
 
@@ -103,7 +103,7 @@ public class WaveManager : MonoBehaviour
 		{
 			Debug.Log (waves[nextWave].name + " Complete!" );
 			countWave++;
-			isAliveList = new List<Dino>();
+			enemyList = new List<Dino>();
 			nextWave++;
 		}
 		
@@ -136,7 +136,7 @@ public class WaveManager : MonoBehaviour
 	public void ResetWave ()
 	{
 		state = SpawnState.Counting;
-		isAliveList = new List<Dino>();
+		enemyList = new List<Dino>();
 		waveCountDown = timeResetWaves;
 		nextWave = 0;
 		countWave = 0;
@@ -145,7 +145,7 @@ public class WaveManager : MonoBehaviour
 	public int GetEnemyIsAlive ()
 	{
 		int enemyCount = 0;
-		foreach (Dino item in isAliveList) 
+		foreach (Dino item in enemyList) 
 		{
 			if (item.hitPoints > 0) 
 			{
@@ -157,7 +157,7 @@ public class WaveManager : MonoBehaviour
 
 	public void GetEnemyCheerWorlds()
 	{
-		foreach (Dino item in isAliveList) 
+		foreach (Dino item in enemyList) 
 		{
 			if (item.hitPoints > 0) 
 			{
@@ -168,12 +168,11 @@ public class WaveManager : MonoBehaviour
 
 	public void ResetEnemy()
 	{
-		foreach (Dino item in isAliveList) 
+		foreach (Dino item in enemyList) 
 		{
-			if (item.hitPoints > 0) 
-			{
-				item.OnHit (500);
-			} 
+			if (item.hitPoints > 0) {
+				item.OnHit (300);
+			}
 		}
 	}
 
@@ -182,15 +181,4 @@ public class WaveManager : MonoBehaviour
 		return countWave;
 	}
 
-	public bool CheckEnemyIsDie ()
-	{
-		foreach (Dino item in isAliveList) 
-		{
-			if (item.hitPoints <= 0) 
-			{
-				return true;
-			} 
-		}
-		return false;
-	}
 }

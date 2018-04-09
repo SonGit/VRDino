@@ -110,18 +110,21 @@ public abstract class Enemy : Character {
 			hitReaction.Hit (hitCollider,dir.normalized * impact/6 ,collisionPoint);
 
 			// Show hit number pop up
-			if(hitPoints > 0)
-			ShowHitNumber (damage);
+			if (hitPoints > 0) 
+			{
+				ShowHitNumber (damage);
 
-			// Calculate damage
-			OnHit (damage);
+				// Calculate damage
+				OnHit (damage);
 
-			// Play Effect 
-			HitEffect(collisionPoint);
+				// Play Effect 
+				HitEffect(collisionPoint);
 
-			RandomHitSound ();
+				RandomHitSound ();
 
-			print ("damage " + damage + " impact "+impact);
+				print ("damage " + damage + " impact "+impact);
+			}
+
 		}
 
 	}
@@ -238,8 +241,12 @@ public abstract class Enemy : Character {
 		stateController.enabled = false;
 		obs.enabled = false;
 		agent.enabled = false;
-		RandomDieSound ();
-		DieEffect();
+		if (hitPoints > 0) 
+		{
+			RandomDieSound ();
+			DieEffect();
+		}
+
 		print("DIE");
 		ApplyPhysics ();
 		StartCoroutine(WaitDestroy ());
@@ -248,7 +255,6 @@ public abstract class Enemy : Character {
 	IEnumerator WaitDestroy()
 	{
 		yield return new WaitForSeconds (15);
-		gameObject.SetActive (false);
 		SmokeEffect (smokeEffectPosition);
 		Destroy ();
 	}

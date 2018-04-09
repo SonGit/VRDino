@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
-using UnityEngine.SceneManagement;
 
 public class Player : Character {
 
@@ -60,11 +59,9 @@ public class Player : Character {
 
 	public void StartGame()
 	{
-		waveManager.enabled = true;
 		MainMenu.instance.Hide ();
-		objectRadialMenu.SetActive (true);
-		VRTK_straightPointerRenderer.enabled = false;
 		objectHUD.SetActive (true);
+		ResetGame ();
 	}
 
 	public void StopGame()
@@ -90,7 +87,8 @@ public class Player : Character {
 
 	public void ReturnGame()
 	{
-		SceneManager.LoadScene ("VR_DinoWar_Enviroment");
+		GameOverMenu.instance.Hide ();
+		MainMenu.instance.Show ();
 	}
 
 	public void GameOver()
