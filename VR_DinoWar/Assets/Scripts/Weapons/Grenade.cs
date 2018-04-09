@@ -49,6 +49,7 @@ public class Grenade : Weapon {
 	{
 		yield return new WaitForSeconds (fuseTime);
 		Instantiate (explosionPrefab,transform.position + new Vector3(0,0,1),explosionPrefab.transform.rotation);
+		AudioManager.instance.PlayClip (AudioManager.SoundFX.Explosion1,transform.position,0.7f);
 		blastRadius.enabled = true;
 		yield return new WaitForSeconds (.05f);
 		Destroy (gameObject);

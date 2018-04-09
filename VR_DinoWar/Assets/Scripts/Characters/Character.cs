@@ -8,12 +8,15 @@ public abstract class Character : Cacheable {
 
 	public void OnHit(int dmg)
 	{
-		hitPoints -= dmg;
+		if (hitPoints <= 0)
+			return;
+		else {
+			hitPoints -= dmg;
 
-		if (hitPoints <= 0) {
-			Die ();
+			if (hitPoints <= 0) {
+				Die ();
+			}
 		}
-			
 	}
 
 	protected virtual void Die()

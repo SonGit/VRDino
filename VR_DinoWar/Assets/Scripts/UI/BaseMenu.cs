@@ -20,15 +20,19 @@ public abstract class BaseMenu : MonoBehaviour {
 
 	}
 
+
+
 	public virtual void Show()
 	{
 		EnableCanvas ();
 		ShowEffect ();
+		PlayMenuClickSound ();
 	}
 
 	public virtual void Hide()
 	{
 		HideEffect ();
+		PlayMenuClickSound ();
 	}
 
 	protected virtual void ShowEffect ()
@@ -62,5 +66,10 @@ public abstract class BaseMenu : MonoBehaviour {
 	{
 		if (canvas != null)
 			canvas.enabled = false;
+	}
+
+	private void PlayMenuClickSound ()
+	{
+		AudioManager.instance.PlayClip (AudioManager.SoundFX.MenuClick,transform.position);
 	}
 }

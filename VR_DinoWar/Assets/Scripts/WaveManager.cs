@@ -180,5 +180,5 @@ public class WaveManager : MonoBehaviour
 	{
 		return countWave;
 	}
-
+		
 }

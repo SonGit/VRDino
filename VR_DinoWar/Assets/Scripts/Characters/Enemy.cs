@@ -241,12 +241,8 @@ public abstract class Enemy : Character {
 		stateController.enabled = false;
 		obs.enabled = false;
 		agent.enabled = false;
-		if (hitPoints > 0) 
-		{
-			RandomDieSound ();
-			DieEffect();
-		}
-
+		RandomDieSound ();
+		DieEffect();
 		print("DIE");
 		ApplyPhysics ();
 		StartCoroutine(WaitDestroy ());
