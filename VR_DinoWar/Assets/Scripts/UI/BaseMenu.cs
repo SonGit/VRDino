@@ -37,7 +37,7 @@ public abstract class BaseMenu : MonoBehaviour {
 
 	protected virtual void ShowEffect ()
 	{
-		container.transform.position = new Vector3 (-23f,17.5f,-37.25f);
+		container.transform.position = new Vector3 (-23f,18f,-37.25f);
 		iTween.MoveBy(gameObject,iTween.Hash(
 			"y"   , -5.25f,
 			"time", 1.5f

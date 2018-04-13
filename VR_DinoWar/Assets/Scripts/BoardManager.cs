@@ -71,13 +71,13 @@ public class BoardManager : MonoBehaviour {
 
 	private string EndMessageWaveClear()
 	{
-		message = "WAVE CLEARED: " + WaveManager.instance.CountWave ();
+		message = "" + WaveManager.instance.CountWave ();
 		return message;
 	}
 
 	private string EndMessageTotalScore()
 	{
-		message = "TOTAL SCORE: " + Player.instance.score;
+		message = "" + Player.instance.score;
 		return message;
 	}
 		

@@ -14,6 +14,7 @@
         private Vector3 originalPosition;
         private Quaternion originalRotation;
         private Vector3 originalScale;
+		private TrailRenderer objTrailRenderer;
 
         public void SetArrowHolder(GameObject holder)
         {
@@ -29,6 +30,7 @@
 
         public void Fired()
         {
+			objTrailRenderer.enabled = true;
             DestroyArrow(maxArrowLife);
         }
 
@@ -44,6 +46,7 @@
         {
             rigidBody = GetComponent<Rigidbody>();
             SetOrigns();
+			objTrailRenderer = this.GetComponent<TrailRenderer> ();
         }
 
         private void SetOrigns()
@@ -67,7 +70,7 @@
             {
                 ResetArrow();
             }
-
+			objTrailRenderer.enabled = false;
 			CheckIfEnemyAndDealDamage (collision,collision.contacts[0].point,10);
 			// Stop spear dead on its track
 			rigidBody.velocity = Vector3.zero;
