@@ -34,7 +34,6 @@ public class WaveManager : MonoBehaviour
 
 	public Wave[] waves;
 	public float timeBetweenWaves = 5f;
-	public float timeResetWaves = 10f;
 	public float waveCountDown;
 	public SpawnState state = SpawnState.Counting;
 
@@ -149,7 +148,7 @@ public class WaveManager : MonoBehaviour
 	{
 		state = SpawnState.Counting;
 		enemyList = new List<Dino>();
-		waveCountDown = timeResetWaves;
+		waveCountDown = timeBetweenWaves;
 		nextWave = 0;
 		countWave = 0;
 	}

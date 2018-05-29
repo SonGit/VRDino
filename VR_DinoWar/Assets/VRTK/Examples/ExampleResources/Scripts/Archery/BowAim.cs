@@ -52,6 +52,7 @@
         {
             bowAnimation = GetComponent<BowAnimation>();
             handle = GetComponentInChildren<BowHandle>();
+
         }
 
 		void Awake()
@@ -149,6 +150,7 @@
 				hasPlayedPullSound = false;
 				isArrowNockSound = false;
 				AudioManager.instance.PlayClip (AudioManager.SoundFX.ArrowFly,transform.position);
+
             }
         }
 
