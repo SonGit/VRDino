@@ -1,11 +1,15 @@
 fileFormatVersion: 2
 guid: 21768c9bb8f895f499a017c4b2ce392c
-timeCreated: 18446744011573954816
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Cylinder01
     4300002: CFX_CircularBig
+    11100000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -25,6 +29,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
