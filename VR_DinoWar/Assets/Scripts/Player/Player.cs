@@ -8,29 +8,17 @@ public class Player : Character {
 	public static Player instance;
 
 	public int enemyNo = 0;
-	public GameObject objectWaveManager;
-	public GameObject objectRightController;
-	public GameObject objectRadialMenu;
-	public GameObject objectHUD;
-	public GameObject objectHeadQuiver; 
 
 	[HideInInspector] public int score;
-
-	private WaveManager waveManager;
-	private VRTK_StraightPointerRenderer VRTK_straightPointerRenderer;
-	private BoxCollider colliderHeadQuiver;
 
 	void Awake()
 	{
 		instance = this;
-		waveManager = objectWaveManager.GetComponent<WaveManager> ();
-		VRTK_straightPointerRenderer = objectRightController.GetComponent<VRTK_StraightPointerRenderer> ();
-		colliderHeadQuiver = objectHeadQuiver.GetComponent<BoxCollider> ();
 	}
 
 	// Use this for initialization
 	void Start () {
-		StopGame ();
+
 	}
 	
 	// Update is called once per frame
@@ -44,7 +32,6 @@ public class Player : Character {
 	protected override void Die()
 	{
 		Debug.Log ("player Die");
-		GameOver ();
 	}
 
 	public override void OnLive ()
@@ -55,51 +42,6 @@ public class Player : Character {
 	public override void OnDestroy ()
 	{
 
-	}
-
-	public void StartGame()
-	{
-		MainMenu.instance.Hide ();
-		objectHUD.SetActive (true);
-		ResetGame ();
-	}
-
-	public void StopGame()
-	{
-		waveManager.enabled = false;
-		objectRadialMenu.SetActive (false);
-		VRTK_straightPointerRenderer.enabled = true;
-		objectHUD.SetActive (false);
-	}
-
-	public void ResetGame()
-	{
-		Player.instance.hitPoints = 100;
-		WaveManager.instance.ResetEnemy ();
-		Player.instance.score = 0;
-		WaveManager.instance.ResetWave ();
-		GameOverMenu.instance.Hide ();
-		waveManager.enabled = true;
-		objectRadialMenu.SetActive (true);
-		VRTK_straightPointerRenderer.enabled = false;
-		colliderHeadQuiver.enabled = true;
-	}
-
-	public void ReturnGame()
-	{
-		GameOverMenu.instance.Hide ();
-		MainMenu.instance.Show ();
-	}
-
-	public void GameOver()
-	{
-		GameOverMenu.instance.Show ();
-		WaveManager.instance.GetEnemyCheerWorlds ();
-		objectRadialMenu.SetActive (false);
-		VRTK_straightPointerRenderer.enabled = true;
-		waveManager.enabled = false;
-		Inventory.instance.DropAllWeapon ();
-		colliderHeadQuiver.enabled = false;
 	}
 
 	public void ExitGame()
@@ -127,5 +69,11 @@ public class Player : Character {
 	{
 		return enemyNo;
 	}
+
+    public void Reset()
+    {
+        hitPoints = 100;
+        score = 0;
+    }
 
 }
