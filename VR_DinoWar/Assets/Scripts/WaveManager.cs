@@ -17,6 +17,7 @@ public class WaveManager : MonoBehaviour
 
 	public enum SpawnState
 	{
+        Stop,
 		Spawning,
 		Waitting,
 		Counting
@@ -43,12 +44,23 @@ public class WaveManager : MonoBehaviour
 
 	void Start ()
 	{
-		waveCountDown = timeBetweenWaves;
+        Stop();
+        waveCountDown = timeBetweenWaves;
 	}
+
+    public void Stop()
+    {
+        state = SpawnState.Stop;
+    }
 
 	void Update ()
 	{
-		if (state == SpawnState.Waitting) 
+        if (state == SpawnState.Stop)
+        {
+            return;
+        }
+
+        if (state == SpawnState.Waitting) 
 		{
 			if (!EnemyIsAlive ()) 
 			{
