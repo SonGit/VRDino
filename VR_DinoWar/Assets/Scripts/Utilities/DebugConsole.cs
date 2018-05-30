@@ -5,6 +5,9 @@ using VRTK;
 
 public class DebugConsole : MonoBehaviour
 {
+	public static DebugConsole instance;
+
+
     [SerializeField]
     private WaveManager waveManager;
     [SerializeField]
@@ -15,6 +18,11 @@ public class DebugConsole : MonoBehaviour
     private GameObject objectRadialMenu;
     [SerializeField]
     private Player player;
+
+	void Awake ()
+	{
+		instance = this;
+	}
 
     void Start()
     {
@@ -27,6 +35,7 @@ public class DebugConsole : MonoBehaviour
         UIConsole.instance.ShowMainMenu(false);
         UIConsole.instance.ShowHUD(true);
         UIConsole.instance.ShowGameOverMenu(false);
+		UIConsole.instance.ShowTutorialMenu(false);
 
         if (player != null)
         {

@@ -9,7 +9,7 @@ public class TutorialMenu : BaseMenu {
 	// Use this for initialization
 	void Start () {
 		Init ();
-		DisableCanvas ();
+		//DisableCanvas ();
 	}
 
 	public void BackToMainMenu()

@@ -108,6 +108,8 @@ public class WaveManager : MonoBehaviour
 		if (nextWave + 1 > waves.Length - 1) 
 		{
 			nextWave = 0;
+			countWave++;
+			enemyList = new List<Dino>();
 			Debug.Log ("All Wave Complete!");
 		} 
 		else 

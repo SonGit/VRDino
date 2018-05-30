@@ -182,7 +182,7 @@ public abstract class Enemy : Character {
 		distance = Vector3.Distance(transform.position,stateController.playerReference.transform.position);
 		if (distance < 5) 
 		{
-			Player.instance.OnHit (100);
+			Player.instance.OnHit (10);
 		}
 
 		isAttack = false;

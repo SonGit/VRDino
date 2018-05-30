@@ -13,7 +13,7 @@ public class GameOverMenu : BaseMenu {
 
 	void Start () {
 		Init ();
-		DisableCanvas ();
+		//DisableCanvas ();
 	}
 
 	public override void Show()
