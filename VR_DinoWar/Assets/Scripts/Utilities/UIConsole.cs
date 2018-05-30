@@ -12,6 +12,8 @@ public class UIConsole : MonoBehaviour {
     private PlayerHUD hud;
     [SerializeField]
     private GameOverMenu gameOverMenu;
+	[SerializeField]
+	private TutorialMenu tutorialMenu;
 
     // Use this for initialization
     void Awake () {
@@ -37,4 +39,9 @@ public class UIConsole : MonoBehaviour {
     {
         gameOverMenu.gameObject.SetActive(visibility);
     }
+
+	public void ShowTutorialMenu(bool visibility)
+	{
+		tutorialMenu.gameObject.SetActive(visibility);
+	}
 }

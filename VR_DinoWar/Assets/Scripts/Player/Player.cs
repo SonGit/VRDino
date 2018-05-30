@@ -32,6 +32,7 @@ public class Player : Character {
 	protected override void Die()
 	{
 		Debug.Log ("player Die");
+		DebugConsole.instance.GameOver ();
 	}
 
 	public override void OnLive ()
