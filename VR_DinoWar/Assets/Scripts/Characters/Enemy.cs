@@ -32,9 +32,7 @@ public abstract class Enemy : Character {
 
 	public bool isJumping;
 
-	protected StateController stateController;
-
-
+    protected StateController stateController;
 
 	public void Initialize()
 	{
@@ -138,33 +136,6 @@ public abstract class Enemy : Character {
 		agent.enabled = false;
 		animator.SetInteger ("State", 8);
 		StunEffect (stunEffectPosition);
-	}
-
-	// Call by animation event
-	public void StartJump()
-	{
-
-	}
-
-	// Call by animation event
-	public void MidJump()
-	{
-		agent.speed = 5;// propels forward
-	}
-
-	// Call by animation event
-	public void EndJump()
-	{
-		StartCoroutine(JumpTouchUp());
-	}
-
-	IEnumerator JumpTouchUp()
-	{
-		agent.enabled = false;
-		yield return new WaitForSeconds (.5f);
-		agent.speed = initialSpeed; //resume speed
-		agent.enabled = true;
-		stateController.Resume();
 	}
 
 	float distance;

@@ -6,14 +6,19 @@ public class Dino_LongLeg : Enemy {
 
 	// Use this for initialization
 	IEnumerator Start () {
+        Initialize();
+        Rigidbody[] rbs = this.GetComponentsInChildren<Rigidbody>();
+        foreach(Rigidbody rb in rbs)
+        {
+            rb.isKinematic = true;
+        }
 
-		gameObject.SetActive (false);
-		Destroy ();
 		yield return new WaitForSeconds (1);
 	}
 
 	// Update is called once per frame
 	void Update () {
+
 		Loop ();
 
 		if(Input.GetKeyDown(KeyCode.P))
@@ -26,12 +31,59 @@ public class Dino_LongLeg : Enemy {
 			OnHit (1000);
 		}
 
+        if (agent.isOnOffMeshLink) {
 
 
-	}
-		
 
-	protected override void ApplyPhysics()
+            if(!isJumping)
+            {
+                agent.speed = 0;
+
+                stateController.AIEnabled = false;
+                print(agent.currentOffMeshLinkData.endPos);
+                isJumping = true;
+                animator.SetTrigger("JumpTrigger");
+                OffMeshEndPos = agent.currentOffMeshLinkData.endPos;
+                agent.enabled = false;
+            }
+
+        }
+
+    }
+
+    private Vector3 OffMeshEndPos;
+    // Call by animation event
+    public void StartJump()
+    {
+        float lobTime = .7f;
+
+        transform.LookAt(OffMeshEndPos);
+        iTween.MoveTo(gameObject, iTween.Hash("position", OffMeshEndPos, "time", lobTime, "easeType", iTween.EaseType.linear));
+    }
+
+    // Call by animation event
+    public void MidJump()
+    {
+
+    }
+
+    // Call by animation event
+    public void EndJump()
+    {
+        StartCoroutine(JumpTouchUp());
+    }
+
+    IEnumerator JumpTouchUp()
+    {
+        animator.SetInteger("State", 0);
+        agent.enabled = false;
+        yield return new WaitForSeconds(.5f);
+        agent.speed = initialSpeed; //resume speed
+        agent.enabled = true;
+        stateController.Resume();
+    }
+
+    protected override void ApplyPhysics()
 	{
 		Rigidbody[] rbs = this.GetComponentsInChildren<Rigidbody> ();
 		foreach(Rigidbody rb in rbs)
