@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114715442353449930}
   - component: {fileID: 114062477781381324}
   - component: {fileID: 114360674234973998}
+  - component: {fileID: 114392504715972078}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -114,11 +115,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: 0
   quality: 1
-  interactable: 0
-  blocksRaycasts: 0
+  interactable: 1
+  blocksRaycasts: 1
   raycastMyLayerOnly: 0
-  forceUseBoxCollider: 0
-  angle: 65
+  forceUseBoxCollider: 1
+  angle: 90
   preserveAspect: 1
   vertAngle: 90
   ringFill: 0.5
@@ -189,8 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0929cfcec0b69f1449bd576454d7eeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpImg: {fileID: 114109738482270118}
-  hpText: {fileID: 114820558660759286}
+  hpImg: {fileID: 0}
+  hpText: {fileID: 0}
 --- !u!114 &114360674234973998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -205,15 +206,26 @@ MonoBehaviour:
   gameObjectToFollow: {fileID: 0}
   gameObjectToChange: {fileID: 0}
   followsPosition: 1
-  smoothsPosition: 1
+  smoothsPosition: 0
   maxAllowedPerFrameDistanceDifference: 0.003
   followsRotation: 1
   smoothsRotation: 0
   maxAllowedPerFrameAngleDifference: 1.5
-  followsScale: 0
+  followsScale: 1
   smoothsScale: 0
   maxAllowedPerFrameSizeDifference: 0.003
   _moment: 2
+--- !u!114 &114392504715972078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1225583060807638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3ed149af81b03b46a70f3c5297ecad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114538826003419644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -169.9994, y: -74.09992, z: 361.0002}
+  savedPos: {x: -169.99959, y: -98.600006, z: 361.00006}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 160, y: 30}
   savedColor: {r: 0.862069, g: 1, b: 0, a: 1}
@@ -244,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 0.0003196093, y: -170.99991, z: 361.0002}
+  savedPos: {x: 0.00012765406, y: -170.99991, z: 361.0001}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 524, y: 38}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -278,7 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 0.0003196093, y: -170.99991, z: 361.0002}
+  savedPos: {x: 0.00012765406, y: -170.99991, z: 361.0001}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 524, y: 38}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
