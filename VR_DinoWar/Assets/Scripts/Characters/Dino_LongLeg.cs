@@ -6,6 +6,7 @@ public class Dino_LongLeg : Enemy {
 
 	// Use this for initialization
 	IEnumerator Start () {
+		Destroy ();
         Initialize();
         Rigidbody[] rbs = this.GetComponentsInChildren<Rigidbody>();
         foreach(Rigidbody rb in rbs)
@@ -38,7 +39,7 @@ public class Dino_LongLeg : Enemy {
             if(!isJumping)
             {
                 agent.speed = 0;
-
+				animator.SetInteger("State",0);
                 stateController.AIEnabled = false;
                 print(agent.currentOffMeshLinkData.endPos);
                 isJumping = true;
@@ -78,6 +79,7 @@ public class Dino_LongLeg : Enemy {
         animator.SetInteger("State", 0);
         agent.enabled = false;
         yield return new WaitForSeconds(.5f);
+		isJumping = false;
         agent.speed = initialSpeed; //resume speed
         agent.enabled = true;
         stateController.Resume();

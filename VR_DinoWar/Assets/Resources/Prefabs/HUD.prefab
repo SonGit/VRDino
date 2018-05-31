@@ -115,10 +115,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: 0
   quality: 1
-  interactable: 1
-  blocksRaycasts: 1
+  interactable: 0
+  blocksRaycasts: 0
   raycastMyLayerOnly: 0
-  forceUseBoxCollider: 1
+  forceUseBoxCollider: 0
   angle: 90
   preserveAspect: 1
   vertAngle: 90
@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0929cfcec0b69f1449bd576454d7eeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpImg: {fileID: 0}
-  hpText: {fileID: 0}
+  hpImg: {fileID: 114109738482270118}
+  hpText: {fileID: 114820558660759286}
 --- !u!114 &114360674234973998
 MonoBehaviour:
   m_ObjectHideFlags: 1

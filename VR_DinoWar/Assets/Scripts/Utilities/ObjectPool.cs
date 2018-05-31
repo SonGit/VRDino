@@ -16,6 +16,8 @@ public class ObjectPool : MonoBehaviour {
 
 	GenericObject<Dino> dinos;
 
+	GenericObject<Dino_LongLeg> dino_LongLeg;
+
 	GenericObject<StunEffect> stunEffect;
 
 	GenericObject<Audio> audioS;
@@ -33,6 +35,7 @@ public class ObjectPool : MonoBehaviour {
 		textHitRandoms = new GenericObject<TextHitRandom>(ObjectFactory.PrefabType.TextHitRandom,1);
 		deathSkulls = new GenericObject<DeathSkull>(ObjectFactory.PrefabType.DeathSkull,1);
 		dinos = new GenericObject<Dino>(ObjectFactory.PrefabType.Dino,1);
+		dino_LongLeg = new GenericObject<Dino_LongLeg>(ObjectFactory.PrefabType.Dino_LongLeg,1);
 		stunEffect = new GenericObject<StunEffect>(ObjectFactory.PrefabType.StunEffect,1);
 		audioS = new GenericObject<Audio>(ObjectFactory.PrefabType.AudioSource,1);
 		smokeEffect = new GenericObject<SmokeEffect> (ObjectFactory.PrefabType.SmokeEffect, 1);
@@ -53,9 +56,20 @@ public class ObjectPool : MonoBehaviour {
 		return deathSkulls.GetObj ();
 	}
 
-	public Dino GetDinos()
+	public Enemy GetEnemy(Enemy enemy)
 	{
-		return dinos.GetObj ();
+		if (enemy is Dino) {
+			//dinos = enemy as Dino;
+			return dinos.GetObj ();
+		}
+
+		if (enemy is Dino_LongLeg) {
+			//dino_LongLeg = enemy as Dino_LongLeg;
+			return dino_LongLeg.GetObj ();
+		}
+
+		return null;
+
 	}
 
 	public StunEffect GetStunEffect()

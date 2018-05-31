@@ -5,6 +5,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
 	
 	public static Spawner instance;
+	public Dino dino;
+	public Dino_LongLeg dino_LongLeg;
 
 	void Awake()
 	{
@@ -14,18 +16,18 @@ public class Spawner : MonoBehaviour {
 	public Transform[] spawnPoints;
 		
 	public void SpawnEnemy () {
-		StartCoroutine (Spawn());
+		StartCoroutine (Spawn(dino));
+		StartCoroutine (Spawn(dino_LongLeg));
 	}	
 
-	IEnumerator Spawn()
+	IEnumerator Spawn(Enemy enemy)
 	{
-		Transform randSpawnPoints = spawnPoints [Random.Range (0, spawnPoints.Length)];
-
-		Dino dino =  ObjectPool.instance.GetDinos ();
+		Transform randSpawnPoint_dino = spawnPoints [Random.Range (0, spawnPoints.Length)];
+		enemy =  ObjectPool.instance.GetEnemy (enemy);
 		yield return new WaitForSeconds (.5f);
-		dino.transform.position = randSpawnPoints.position;
-		dino.Live ();
-		WaveManager.instance.enemyList.Add(dino);
+		enemy.transform.position = randSpawnPoint_dino.position;
+		enemy.Live ();
+		WaveManager.instance.enemyList.Add(enemy);
 	}
 
 }

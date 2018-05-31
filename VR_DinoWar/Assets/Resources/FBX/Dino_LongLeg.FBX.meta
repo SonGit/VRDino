@@ -209,7 +209,7 @@ ModelImporter:
       name: Dino_LongLegIdle
       takeName: Take 001
       firstFrame: 140
-      lastFrame: 179
+      lastFrame: 215
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -236,7 +236,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Dino_LongLegIdleLook
       takeName: Take 001
-      firstFrame: 180
+      firstFrame: 185
       lastFrame: 260
       wrapMode: 0
       orientationOffsetY: 0

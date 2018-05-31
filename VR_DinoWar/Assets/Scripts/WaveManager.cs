@@ -12,7 +12,7 @@ public class WaveManager : MonoBehaviour
 		instance = this;
 	}
 
-	[HideInInspector] public List<Dino> enemyList = new List<Dino>();
+	[HideInInspector] public List<Enemy> enemyList = new List<Enemy>();
 
 
 	public enum SpawnState
@@ -109,14 +109,14 @@ public class WaveManager : MonoBehaviour
 		{
 			nextWave = 0;
 			countWave++;
-			enemyList = new List<Dino>();
+			enemyList = new List<Enemy>();
 			Debug.Log ("All Wave Complete!");
 		} 
 		else 
 		{
 			Debug.Log (waves[nextWave].name + " Complete!" );
 			countWave++;
-			enemyList = new List<Dino>();
+			enemyList = new List<Enemy>();
 			nextWave++;
 		}
 		
@@ -149,7 +149,7 @@ public class WaveManager : MonoBehaviour
 	public void ResetWave ()
 	{
 		state = SpawnState.Counting;
-		enemyList = new List<Dino>();
+		enemyList = new List<Enemy>();
 		waveCountDown = timeBetweenWaves;
 		nextWave = 0;
 		countWave = 0;
@@ -158,7 +158,7 @@ public class WaveManager : MonoBehaviour
 	public int GetEnemyIsAlive ()
 	{
 		int enemyCount = 0;
-		foreach (Dino item in enemyList) 
+		foreach (Enemy item in enemyList) 
 		{
 			if (item.hitPoints > 0) 
 			{
@@ -170,7 +170,7 @@ public class WaveManager : MonoBehaviour
 
 	public void GetEnemyCheerWorlds()
 	{
-		foreach (Dino item in enemyList) 
+		foreach (Enemy item in enemyList) 
 		{
 			if (item.hitPoints > 0) 
 			{
@@ -181,7 +181,7 @@ public class WaveManager : MonoBehaviour
 
 	public void ResetEnemy()
 	{
-		foreach (Dino item in enemyList) 
+		foreach (Enemy item in enemyList) 
 		{
 			if (item.hitPoints > 0) {
 				item.OnHit (300);

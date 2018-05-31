@@ -20,6 +20,7 @@ public class ObjectFactory: MonoBehaviour {
 		DeathSkull,
 		StunEffect,
 		Dino,
+		Dino_LongLeg,
 		AudioSource,
 		SmokeEffect
 	}
@@ -31,6 +32,7 @@ public class ObjectFactory: MonoBehaviour {
 		{ PrefabType.TextHitRandom, "Prefabs/TextHitRandom" },
 		{ PrefabType.DeathSkull, "Prefabs/DeathSkull" },
 		{ PrefabType.Dino, "Prefabs/DinoFat" },
+		{ PrefabType.Dino_LongLeg, "Prefabs/Dino_LongLeg" },
 		{ PrefabType.StunEffect, "Prefabs/StunEffect" },
 		{ PrefabType.AudioSource, "Prefabs/AudioSource" },
 		{ PrefabType.SmokeEffect, "Prefabs/SmokeEffect" },
