@@ -56,7 +56,7 @@ public class DebugConsole : MonoBehaviour
             print("waveManager is null!");
         }
 
-        ShowColliderHeadQuiver(true);
+        //ShowColliderHeadQuiver(true);
         ShowVRPointer(false);
         ShowRadialMenu(true);
     }
@@ -130,7 +130,7 @@ public class DebugConsole : MonoBehaviour
         }
     }
 
-    void ShowColliderHeadQuiver(bool visible)
+	public void ShowColliderHeadQuiver(bool visible)
     {
         if (colliderHeadQuiver != null)
         {

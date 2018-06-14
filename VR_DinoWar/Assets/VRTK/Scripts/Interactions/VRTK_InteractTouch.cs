@@ -1,8 +1,9 @@
 ﻿// Interact Touch|Interactions|30050
 namespace VRTK
 {
-    using UnityEngine;
-    using System.Collections.Generic;
+	using System.Collections;
+	using System.Collections.Generic;
+	using UnityEngine;
 
     /// <summary>
     /// Event Payload
@@ -39,6 +40,7 @@ namespace VRTK
     [AddComponentMenu("VRTK/Scripts/Interactions/VRTK_InteractTouch")]
     public class VRTK_InteractTouch : MonoBehaviour
     {
+
         [Tooltip("An optional GameObject that contains the compound colliders to represent the touching object. If this is empty then the collider will be auto generated at runtime to match the SDK default controller.")]
         public GameObject customColliderContainer;
 
@@ -85,6 +87,7 @@ namespace VRTK
                 return VRTK_ControllerReference.GetControllerReference(gameObject);
             }
         }
+			
 
         public virtual void OnControllerStartTouchInteractableObject(ObjectInteractEventArgs e)
         {
@@ -252,7 +255,7 @@ namespace VRTK
             VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
         }
 
-        protected virtual void OnEnable()
+		public virtual void OnEnable()
         {
             destroyColliderOnDisable = false;
             SDK_BaseController.ControllerHand controllerHand = VRTK_DeviceFinder.GetControllerHand(gameObject);
@@ -264,7 +267,7 @@ namespace VRTK
             CreateTouchRigidBody();
         }
 
-        protected virtual void OnDisable()
+		public virtual void OnDisable()
         {
             ForceStopTouching();
             DestroyTouchCollider();
@@ -287,6 +290,7 @@ namespace VRTK
                 ForceStopTouching();
                 triggerIsColliding = true;
             }
+
         }
 
         protected virtual void OnTriggerExit(Collider collider)
@@ -297,6 +301,75 @@ namespace VRTK
             }
         }
 
+		private GameObject[] colliderWeapons;
+		[HideInInspector] public bool isActiveCollider;
+
+		public void ColliderWeapon (bool isActive)
+		{
+			for (int i = 0; i < colliderWeapons.Length; i++) {
+				colliderWeapons [i].GetComponentInChildren<Collider> ().enabled = isActive;
+			}
+		}
+
+
+		void Start ()
+		{
+			isActiveCollider = false;
+		}
+
+		void Update ()
+		{
+			colliderWeapons = GameObject.FindGameObjectsWithTag ("Weapon");
+
+			RaycastHit hit;
+			Ray ray = new Ray (Inventory.instance.leftHand.transform.position, Inventory.instance.leftHand.transform.forward);
+
+			float range = 3.2f;
+			Debug.DrawRay (Inventory.instance.leftHand.transform.position,Inventory.instance.leftHand.transform.forward * range, Color.blue);
+
+			ColliderWeapon (true);
+
+			if (Physics.Raycast (ray, out hit, range) && hit.collider.tag == "Enemy") {
+
+				if (isActiveCollider) {
+					ColliderWeapon (true);	
+				} else {
+					ColliderWeapon (false);	
+				}
+					
+				GameObject colliderInteractableObject = TriggerStart (hit.collider);
+
+				if (touchedObject == null || hit.collider.transform.IsChildOf (touchedObject.transform)) {
+					triggerIsColliding = false;
+				}
+
+				if (touchedObject == null && colliderInteractableObject != null && IsObjectInteractable (hit.collider.gameObject)) {
+					touchedObject = colliderInteractableObject;
+					VRTK_InteractableObject touchedObjectScript = touchedObject.GetComponent<VRTK_InteractableObject> ();
+
+					//If this controller is not allowed to touch this interactable object then clean up touch and return before initiating a touch.
+					if (touchedObjectScript != null && !touchedObjectScript.IsValidInteractableController (gameObject, touchedObjectScript.allowedTouchControllers)) {
+						CleanupEndTouch ();
+						return;
+					}
+
+					OnControllerStartTouchInteractableObject (SetControllerInteractEvent (touchedObject));
+					StoreTouchedObjectColliders (hit.collider);
+
+					touchedObjectScript.ToggleHighlight (true);
+					ToggleControllerVisibility (false);
+					CheckRumbleController (touchedObjectScript);
+					touchedObjectScript.StartTouching (this);
+
+					OnControllerTouchInteractableObject (SetControllerInteractEvent (touchedObject));
+				}
+
+			} 
+
+		}
+
+
+
         protected virtual void OnTriggerStay(Collider collider)
         {
             GameObject colliderInteractableObject = TriggerStart(collider);
@@ -305,12 +378,12 @@ namespace VRTK
             {
                 triggerIsColliding = true;
             }
-
+				
             if (touchedObject == null && colliderInteractableObject != null && IsObjectInteractable(collider.gameObject))
             {
-                touchedObject = colliderInteractableObject;
-                VRTK_InteractableObject touchedObjectScript = touchedObject.GetComponent<VRTK_InteractableObject>();
-
+				touchedObject = colliderInteractableObject;
+				VRTK_InteractableObject touchedObjectScript = touchedObject.GetComponent<VRTK_InteractableObject> ();
+                
                 //If this controller is not allowed to touch this interactable object then clean up touch and return before initiating a touch.
                 if (touchedObjectScript != null && !touchedObjectScript.IsValidInteractableController(gameObject, touchedObjectScript.allowedTouchControllers))
                 {
@@ -328,6 +401,10 @@ namespace VRTK
                 OnControllerTouchInteractableObject(SetControllerInteractEvent(touchedObject));
             }
         }
+
+
+
+
 
         protected virtual void FixedUpdate()
         {
@@ -505,7 +582,7 @@ namespace VRTK
                 }
                 controllerCollisionDetector = Instantiate(defaultColliderPrefab, transform.position, transform.rotation) as GameObject;
                 controllerCollisionDetector.transform.SetParent(transform);
-                controllerCollisionDetector.transform.localScale = transform.localScale;
+				controllerCollisionDetector.transform.localScale = transform.localScale;
                 controllerCollisionDetector.name = VRTK_SharedMethods.GenerateVRTKObjectName(true, "Controller", "CollidersContainer");
                 destroyColliderOnDisable = true;
             }

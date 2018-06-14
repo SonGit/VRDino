@@ -31,19 +31,23 @@ public class Dino : Enemy {
 
 
 	}
+		
 
-	private void OnCollisionEnter(Collision collision)
-	{
-
-	}
-
-	public Rigidbody pelvis;
 	protected override void ApplyPhysics()
 	{
 		Rigidbody[] rbs = this.GetComponentsInChildren<Rigidbody> ();
 		foreach(Rigidbody rb in rbs)
 		{
 			rb.useGravity = true;
+
+			float rand = Random.Range (5f,8f);
+			Vector3 v = rb.velocity;
+
+			if (rb.velocity.y > 10f) {
+				v.y = rand;
+				rb.velocity = v;
+			}
+
 		}
 		bodyIK.enabled = false;
 		animator.enabled = false;

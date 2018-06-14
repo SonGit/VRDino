@@ -34,8 +34,6 @@ public class Dino_LongLeg : Enemy {
 
         if (agent.isOnOffMeshLink) {
 
-
-
             if(!isJumping)
             {
                 agent.speed = 0;
@@ -91,6 +89,14 @@ public class Dino_LongLeg : Enemy {
 		foreach(Rigidbody rb in rbs)
 		{
 			rb.useGravity = true;
+
+			float rand = Random.Range (5f,8f);
+			Vector3 v = rb.velocity;
+
+			if (rb.velocity.y > 10f) {
+				v.y = rand;
+				rb.velocity = v;
+			}
 		}
 		bodyIK.enabled = false;
 		animator.enabled = false;
@@ -127,4 +133,6 @@ public class Dino_LongLeg : Enemy {
 	{
 		gameObject.SetActive (false);
 	}
+		
+		
 }

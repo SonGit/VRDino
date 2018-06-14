@@ -7,13 +7,17 @@ public class Spawner : MonoBehaviour {
 	public static Spawner instance;
 	public Dino dino;
 	public Dino_LongLeg dino_LongLeg;
+	public GameObject[] spawnPoints;
 
 	void Awake()
 	{
 		instance = this;
 	}
 
-	public Transform[] spawnPoints;
+	void Start ()
+	{
+		spawnPoints = GameObject.FindGameObjectsWithTag ("Spawner");
+	}
 		
 	public void SpawnEnemy () {
 		StartCoroutine (Spawn(dino));
@@ -22,10 +26,10 @@ public class Spawner : MonoBehaviour {
 
 	IEnumerator Spawn(Enemy enemy)
 	{
-		Transform randSpawnPoint_dino = spawnPoints [Random.Range (0, spawnPoints.Length)];
+		GameObject randSpawnPoint = spawnPoints [Random.Range (0, spawnPoints.Length)];
 		enemy =  ObjectPool.instance.GetEnemy (enemy);
 		yield return new WaitForSeconds (.5f);
-		enemy.transform.position = randSpawnPoint_dino.position;
+		enemy.transform.position = randSpawnPoint.transform.position;
 		enemy.Live ();
 		WaveManager.instance.enemyList.Add(enemy);
 	}

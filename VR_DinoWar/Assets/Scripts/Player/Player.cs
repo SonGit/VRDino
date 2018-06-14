@@ -9,7 +9,7 @@ public class Player : Character {
 
 	public int enemyNo = 0;
 
-	[HideInInspector] public int score;
+	public int score;
 
 	void Awake()
 	{

@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 124281214092667436}
   - component: {fileID: 92426875952152660}
   - component: {fileID: 81753920429653672}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TestCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1158,6 +1158,9 @@ GameObject:
   - component: {fileID: 195206802823772964}
   - component: {fileID: 208383461561106324}
   - component: {fileID: 114133597000081044}
+  - component: {fileID: 114875447943758396}
+  - component: {fileID: 114197788013383326}
+  - component: {fileID: 65104998968600386}
   m_Layer: 0
   m_Name: DinoFat
   m_TagString: Enemy
@@ -2413,7 +2416,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1796121031522268}
   m_LocalRotation: {x: -0, y: 0.6395724, z: -0, w: -0.76873094}
-  m_LocalPosition: {x: -1.9198399, y: 3.695577, z: -29.322433}
+  m_LocalPosition: {x: -24.66, y: 9.52, z: -37.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4407757868621748}
@@ -2778,7 +2781,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1426743792464410}
   serializedVersion: 2
-  m_Mass: 3.125
+  m_Mass: 5.125
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2891,6 +2894,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65104998968600386
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1796121031522268}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7288056, y: 1.0808697, z: 0.85364854}
+  m_Center: {x: 0.00695965, y: 1.2282438, z: 0.22101563}
 --- !u!65 &65754312629972818
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3514,6 +3529,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitReaction: {fileID: 114997859631857018}
   hitForce: 2
+--- !u!114 &114197788013383326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1796121031522268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ba86aef0165ea478dd29cbcc0e4bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  precisionGrab: 0
+  rightSnapHandle: {fileID: 0}
+  leftSnapHandle: {fileID: 0}
+  throwVelocityWithAttachDistance: 0
+  throwMultiplier: 4
+  onGrabCollisionDelay: 0
+  destroyImmediatelyOnThrow: 1
+  rbGrab: {fileID: 0}
+  isThrow: 0
+  isHold: 0
+  breakForce: 1500
 --- !u!114 &114347318992906304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3541,8 +3578,8 @@ MonoBehaviour:
   obs: {fileID: 0}
   isIdleDone: 0
   isJumping: 0
+  stateController: {fileID: 0}
   stunTime: 0
-  pelvis: {fileID: 0}
 --- !u!114 &114686457000838012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3562,6 +3599,36 @@ MonoBehaviour:
   minimumRange: 3.5
   playerReference: {fileID: 0}
   enemy: {fileID: 0}
+--- !u!114 &114875447943758396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1796121031522268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7345386025bfad4faae010a833b9c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenIdle: 1
+  touchHighlightColor: {r: 0.9607843, g: 0.050980415, b: 0.24493334, a: 0}
+  allowedTouchControllers: 0
+  ignoredColliders: []
+  isGrabbable: 1
+  holdButtonToGrab: 1
+  stayGrabbedOnTeleport: 1
+  validDrop: 1
+  grabOverrideButton: 0
+  allowedGrabControllers: 0
+  grabAttachMechanicScript: {fileID: 114197788013383326}
+  secondaryGrabActionScript: {fileID: 0}
+  isUsable: 0
+  holdButtonToUse: 1
+  useOnlyIfGrabbed: 0
+  pointerActivatesUseAction: 0
+  useOverrideButton: 0
+  allowedUseControllers: 0
+  usingState: 0
 --- !u!114 &114997859631857018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5127,7 +5194,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.16179729, y: 0.24066062, z: -0.00000029313378}
+  m_ConnectedAnchor: {x: 0.16179764, y: 0.2406601, z: 0.0000017564744}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -5171,7 +5238,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.31720382, y: 0.02794221, z: -0.32246196}
+  m_ConnectedAnchor: {x: -0.31720412, y: 0.027942091, z: -0.322462}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -5215,7 +5282,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.25459445, y: -0.000000074505806, z: 0.00000031292439}
+  m_ConnectedAnchor: {x: -0.25459474, y: 0.0000003799796, z: 0.00000023841858}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -5259,7 +5326,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: -1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.25459445, y: 0.00000029802322, z: -0.00000044703484}
+  m_ConnectedAnchor: {x: 0.25459403, y: -0.0000011026859, z: 0.0000008940697}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -5303,7 +5370,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.04000344, y: -0.052806824, z: -0.35482505}
+  m_ConnectedAnchor: {x: -0.040003404, y: -0.052806556, z: -0.35482508}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -5347,7 +5414,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.7586001, y: 0.3247853, z: -0.00000035762787}
+  m_ConnectedAnchor: {x: -0.7586005, y: 0.3247856, z: 0.0000016093254}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -5391,7 +5458,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.31720382, y: 0.02794221, z: 0.32246143}
+  m_ConnectedAnchor: {x: -0.3172041, y: 0.027941525, z: 0.32246324}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:
@@ -5435,7 +5502,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.3510857, y: -0.000000461936, z: -0.0000007003546}
+  m_ConnectedAnchor: {x: 0.35108462, y: 0.0000011324883, z: 0.00000037252903}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -5479,7 +5546,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.040003415, y: -0.05280684, z: 0.35482442}
+  m_ConnectedAnchor: {x: -0.040002987, y: -0.05280684, z: 0.3548245}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:
@@ -5523,7 +5590,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.4039784, y: 0, z: -0.0000008940697}
+  m_ConnectedAnchor: {x: -0.4039783, y: 0.0000001937151, z: -0.0000008940697}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:
@@ -5567,7 +5634,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.35108504, y: -0.0000005662441, z: -0.0000004246831}
+  m_ConnectedAnchor: {x: -0.35108557, y: 0.0000011026859, z: 0.00000044703484}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -5615,12 +5682,12 @@ NavMeshAgent:
   avoidancePriority: 50
   m_AngularSpeed: 160
   m_StoppingDistance: 3
-  m_AutoTraverseOffMeshLink: 1
+  m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: -0.26
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 3
   m_ObstacleAvoidanceType: 4
 --- !u!208 &208383461561106324
 NavMeshObstacle:

@@ -24,4 +24,21 @@ public class SmokeEffect : Cacheable {
 	{
 		
 	}
+
+	float timeCount = 0;
+
+	void Update()
+	{
+		if (!_living)
+			return;
+		
+			timeCount += Time.deltaTime;
+
+			if (timeCount > 1) {
+				timeCount = 0;
+				Destroy ();
+			}
+
+	}
+
 }

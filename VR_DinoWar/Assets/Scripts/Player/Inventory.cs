@@ -44,26 +44,30 @@ public class Inventory : MonoBehaviour {
 
 	public void GetClub(bool isRightHand = true)
 	{
-		Grab (isRightHand,clubPrefab);
+		Grab (isRightHand,clubPrefab,false);
+
 	}
 
 	public void GetSpear(bool isRightHand = true)
 	{
-		Grab (isRightHand,spearPrefab);
+		Grab (isRightHand,spearPrefab,false);
+
 	}
 
 	public void GetBow(bool isRightHand = true)
 	{
-		Grab (isRightHand,bowPrefab);
+		Grab (isRightHand,bowPrefab,true);
+
 	}
 
 	public void GetGrenade(bool isRightHand = true)
 	{
-		Grab (isRightHand,grenadePrefab);
+		Grab (isRightHand,grenadePrefab,false);
 	}
 
-	void Grab(bool isRightHand,GameObject prefab)
+	void Grab(bool isRightHand,GameObject prefab, bool isShowHeadQuiver)
 	{
+		DebugConsole.instance.ShowColliderHeadQuiver (isShowHeadQuiver);
 		bool dropped = Drop (isRightHand,prefab);
 
 		if (!dropped)

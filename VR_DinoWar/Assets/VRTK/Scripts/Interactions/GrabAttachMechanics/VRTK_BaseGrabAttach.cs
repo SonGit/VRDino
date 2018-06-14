@@ -9,7 +9,7 @@ namespace VRTK.GrabAttachMechanics
     /// <remarks>
     /// As this is an abstract class, it cannot be applied directly to a game object and performs no logic.
     /// </remarks>
-    public abstract class VRTK_BaseGrabAttach : MonoBehaviour
+	public abstract class VRTK_BaseGrabAttach : MonoBehaviour
     {
         [Header("Base Options", order = 1)]
 

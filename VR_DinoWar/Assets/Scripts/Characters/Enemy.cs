@@ -16,6 +16,7 @@ public abstract class Enemy : Character {
 	public float rate;
 	public bool isAttack;
 
+
 	public AudioSource footstepSFX;
 
 	[HideInInspector] public Animator animator;
@@ -32,7 +33,12 @@ public abstract class Enemy : Character {
 
 	public bool isJumping;
 
-    protected StateController stateController;
+	public StateController stateController;
+
+	Collider[] colliders;
+
+	EnemyGrab enemyGrab;
+
 
 	public void Initialize()
 	{
@@ -40,6 +46,7 @@ public abstract class Enemy : Character {
 		agent = this.GetComponentInChildren<NavMeshAgent> ();
 		stateController = this.GetComponentInChildren<StateController> ();
 		obs = this.GetComponentInChildren<NavMeshObstacle> ();
+		enemyGrab = this.GetComponent<EnemyGrab> ();
 		initialSpeed = agent.speed;
 
 		animator.enabled = true;
@@ -57,6 +64,9 @@ public abstract class Enemy : Character {
 			rb.useGravity = false;
 			rb.isKinematic = false;
 		}
+
+		colliders = this.GetComponentsInChildren<Collider> ();
+		OnOffCollider (true,true);
 	}
 
 	protected void Loop()
@@ -81,17 +91,6 @@ public abstract class Enemy : Character {
 		}
 
 
-//		if (agent.isOnOffMeshLink) {
-//			if (!isJumping) {
-//				stateController.AIEnabled = false;
-//				agent.speed = 1;
-//
-//				isJumping = true;
-//
-//				animator.SetInteger ("State", 2);
-//				print ("JUMPING");
-//			}
-//		}
 	}
 		
 		
@@ -153,7 +152,7 @@ public abstract class Enemy : Character {
 		distance = Vector3.Distance(transform.position,stateController.playerReference.transform.position);
 		if (distance < 5) 
 		{
-			Player.instance.OnHit (10);
+			Player.instance.OnHit (0);
 		}
 
 		isAttack = false;
@@ -217,6 +216,8 @@ public abstract class Enemy : Character {
 		print("DIE");
 		ApplyPhysics ();
 		StartCoroutine(WaitDestroy ());
+		OnOffCollider (false,true);
+		enemyGrab.ApplyPhysicsGrab ();
 	}
 
 	IEnumerator WaitDestroy()
@@ -241,7 +242,7 @@ public abstract class Enemy : Character {
 	public void LocalAvoidanceOn()
 	{
 		agent.enabled = false;
-		obs.enabled = true;
+		obs.enabled = false;
 	}
 
 	public void LocalAvoidanceOff()
@@ -328,6 +329,19 @@ public abstract class Enemy : Character {
 	protected virtual void Default()
 	{
 
+	}
+
+
+	public void OnOffCollider (bool boolTrigger, bool boolCollider)
+	{
+		for (int i = 0; i < colliders.Length; i++) {
+			
+			if (i == 0) {
+				colliders [i].enabled = boolTrigger;
+			} else {
+				colliders [i].enabled = boolCollider;
+			}
+		}
 	}
 
 		
