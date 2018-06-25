@@ -185,7 +185,7 @@ using System.Collections;
 
 			// Get rotation from animated limb direction to solver limb direction
 			Quaternion f = Quaternion.FromToRotation(bone3.position - bone1.position, solverDirection);
-
+			// FIX
 			// Rotate the default bend direction by f
 			Vector3 dir = f * (bone2.position - bone1.position);
 

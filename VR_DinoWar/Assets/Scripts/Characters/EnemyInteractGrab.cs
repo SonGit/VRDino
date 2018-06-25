@@ -24,14 +24,15 @@ public class EnemyInteractGrab : VRTK_InteractableObject {
 		RemoveTrackPoint();
 		grabbingObjects.Add(currentGrabbingObject);
 		SetTrackPoint(currentGrabbingObject);
-		if (!IsSwappable())
+		if (!IsSwappable() && enemy != null)
 		{
 			previousIsGrabbable = isGrabbable;
 			isGrabbable = false;
 			enemy.stateController.enabled = false;
+			enemy.agent.enabled = false;
 			enemyGrab.isHold = true;
-			Inventory.instance.leftHand.GetComponent<VRTK_InteractTouch> ().isActiveCollider = true;
-			Inventory.instance.rightHand.GetComponent<VRTK_InteractTouch> ().isActiveCollider = true;
+			//Inventory.instance.leftHand.GetComponent<VRTK_InteractTouch> ().isActiveCollider = true;
+			//Inventory.instance.rightHand.GetComponent<VRTK_InteractTouch> ().isActiveCollider = true;
 
 		}
 	}

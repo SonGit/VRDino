@@ -79,6 +79,7 @@ public class Weapon : VRTK_InteractableObject {
 		if(weaponCollider != null)
 		weaponCollider.size = meleeScale;
 		//interactableRigidbody.isKinematic = false;
+		print("Grabbed");
 	}
 
 	protected void ResetPosition(object sender, InteractableObjectEventArgs e)
@@ -136,7 +137,8 @@ public class Weapon : VRTK_InteractableObject {
 	{
 		base.Ungrabbed (previousGrabbingObject);
 		weaponCollider.isTrigger = false;
-		weaponCollider.size = thrownScale;
+		//weaponCollider.size = thrownScale;
+		print("Ungrabbed");
 	}
 
 

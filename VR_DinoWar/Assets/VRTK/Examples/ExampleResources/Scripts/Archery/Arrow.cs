@@ -112,12 +112,17 @@
 		protected void CheckIfEnemyAndDealDamage(Collision collision,Vector3 collisionPoint,float force)
 		{
 			enemy = collision.transform.root.GetComponent<Enemy> ();
+	
 			// If player indeed hit the enemy
-			if (enemy != null) {
+			if (enemy != null ) {
 				enemy.Hit (collision.collider,collisionPoint,force * 5f);
+				StartCoroutine (Grenade.instance.Explode (collisionPoint));
 				print (collision.collider + "        "+collisionPoint);
+
 			}
+
 		}
+
 
 
 

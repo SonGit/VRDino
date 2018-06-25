@@ -150,7 +150,8 @@
 				hasPlayedPullSound = false;
 				isArrowNockSound = false;
 				AudioManager.instance.PlayClip (AudioManager.SoundFX.ArrowFly,transform.position);
-
+				Grenade.instance.blastRadius.enabled = false;
+				Grenade.instance.colliderFight.enabled = true;
             }
         }
 

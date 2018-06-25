@@ -3,57 +3,73 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
 
-public class Grenade : Weapon {
-	
-	public Collider blastRadius;
+namespace VRTK.Examples.Archery
+{
+	public class Grenade : MonoBehaviour {
 
-	public float fuseTime = 3;
+		public static Grenade instance;
+		
+		public Collider blastRadius;
+		public Collider colliderFight;
 
-	float timeCount = 0;
 
-	public GameObject explosionPrefab;
+		private Arrow arrow;
 
-	// Use this for initialization
-	void Start () {
-		Initialize ();
-		blastRadius.enabled = false;
-	}
-	
-	// when weapon is thrown
-	public override void Thrown(bool enoughForce = true)
-	{
-		base.Thrown ();
-		StartCoroutine (Explode());
-	}
-
-	void OnTriggerEnter(Collider other) {
-		CheckIfEnemyAndBlast (other.transform);
-		timeCount += Time.deltaTime;
-	}
-
-	protected void CheckIfEnemyAndBlast(Transform t)
-	{
-		enemy = t.root.GetComponent<Enemy> ();
-		// If player indeed hit the enemy
-		if (enemy != null) {
-			enemy.Blast (transform.position);
+		void Awake ()
+		{
+			instance = this;
 		}
 
-		Rigidbody rb = t.GetComponent<Rigidbody> ();
-		if (rb != null) {
-			rb.AddExplosionForce (1000,transform.position,100);
-		}
-	}
+		// Use this for initialization
+		void Start () {
+			//Initialize ();
+			blastRadius.enabled = false;
+			colliderFight.enabled = false;
+			arrow = GetComponentInParent<Arrow> ();
 
-	IEnumerator Explode()
-	{
-		yield return new WaitForSeconds (fuseTime);
-		Instantiate (explosionPrefab,transform.position + new Vector3(0,0,1),explosionPrefab.transform.rotation);
-		AudioManager.instance.PlayClip (AudioManager.SoundFX.Explosion1,transform.position,0.7f);
-		blastRadius.enabled = true;
-		yield return new WaitForSeconds (.05f);
-		Destroy (gameObject);
+		}
+
+		Enemy enemy;
+		public void CheckIfEnemyAndBlast(Transform t)
+		{
+			enemy = t.root.GetComponent<Enemy> ();
+			// If player indeed hit the enemy
+			if (enemy != null) {
+				enemy.Blast (transform.position);
+			}
+
+			Rigidbody rb = t.GetComponentInParent<Rigidbody> ();
+			if (rb != null) {
+				rb.AddExplosionForce (1000,transform.position,100);
+			}
+				
+		}
+			
+		private void OnTriggerEnter (Collider collider)
+		{
+			if (arrow.inFlight && collider.gameObject.tag == "Terrain 1"){
+				StartCoroutine (Explode (transform.position));
+			}
+				
+			CheckIfEnemyAndBlast (collider.transform);
+		}
+			
+			
+		public IEnumerator Explode(Vector3 pos)
+		{
+			ExplosionBoom explosionBoom = ObjectPool.instance.GetExplosionBoom ();
+			explosionBoom.transform.position = pos;
+			explosionBoom.Live ();
+			AudioManager.instance.PlayClip (AudioManager.SoundFX.Explosion1,transform.position,0.7f);
+			blastRadius.enabled = true;
+			yield return new WaitForSeconds (0.02f);
+			if (gameObject != null) {
+				Destroy (gameObject);
+				Destroy (arrow.gameObject);
+			}
+
+
+		}
+			
 	}
-		
-		
 }

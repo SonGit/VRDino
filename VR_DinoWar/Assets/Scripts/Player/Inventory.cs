@@ -45,19 +45,16 @@ public class Inventory : MonoBehaviour {
 	public void GetClub(bool isRightHand = true)
 	{
 		Grab (isRightHand,clubPrefab,false);
-
 	}
 
 	public void GetSpear(bool isRightHand = true)
 	{
 		Grab (isRightHand,spearPrefab,false);
-
 	}
 
 	public void GetBow(bool isRightHand = true)
 	{
 		Grab (isRightHand,bowPrefab,true);
-
 	}
 
 	public void GetGrenade(bool isRightHand = true)

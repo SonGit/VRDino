@@ -301,72 +301,78 @@ namespace VRTK
             }
         }
 
-		private GameObject[] colliderWeapons;
-		[HideInInspector] public bool isActiveCollider;
-
-		public void ColliderWeapon (bool isActive)
-		{
-			for (int i = 0; i < colliderWeapons.Length; i++) {
-				colliderWeapons [i].GetComponentInChildren<Collider> ().enabled = isActive;
-			}
-		}
-
-
-		void Start ()
-		{
-			isActiveCollider = false;
-		}
-
-		void Update ()
-		{
-			colliderWeapons = GameObject.FindGameObjectsWithTag ("Weapon");
-
-			RaycastHit hit;
-			Ray ray = new Ray (Inventory.instance.leftHand.transform.position, Inventory.instance.leftHand.transform.forward);
-
-			float range = 3.2f;
-			Debug.DrawRay (Inventory.instance.leftHand.transform.position,Inventory.instance.leftHand.transform.forward * range, Color.blue);
-
-			ColliderWeapon (true);
-
-			if (Physics.Raycast (ray, out hit, range) && hit.collider.tag == "Enemy") {
-
-				if (isActiveCollider) {
-					ColliderWeapon (true);	
-				} else {
-					ColliderWeapon (false);	
-				}
-					
-				GameObject colliderInteractableObject = TriggerStart (hit.collider);
-
-				if (touchedObject == null || hit.collider.transform.IsChildOf (touchedObject.transform)) {
-					triggerIsColliding = false;
-				}
-
-				if (touchedObject == null && colliderInteractableObject != null && IsObjectInteractable (hit.collider.gameObject)) {
-					touchedObject = colliderInteractableObject;
-					VRTK_InteractableObject touchedObjectScript = touchedObject.GetComponent<VRTK_InteractableObject> ();
-
-					//If this controller is not allowed to touch this interactable object then clean up touch and return before initiating a touch.
-					if (touchedObjectScript != null && !touchedObjectScript.IsValidInteractableController (gameObject, touchedObjectScript.allowedTouchControllers)) {
-						CleanupEndTouch ();
-						return;
-					}
-
-					OnControllerStartTouchInteractableObject (SetControllerInteractEvent (touchedObject));
-					StoreTouchedObjectColliders (hit.collider);
-
-					touchedObjectScript.ToggleHighlight (true);
-					ToggleControllerVisibility (false);
-					CheckRumbleController (touchedObjectScript);
-					touchedObjectScript.StartTouching (this);
-
-					OnControllerTouchInteractableObject (SetControllerInteractEvent (touchedObject));
-				}
-
-			} 
-
-		}
+//		private GameObject[] colliderWeapons;
+//		[HideInInspector] public bool isActiveCollider;
+//
+//		public void ColliderWeapon (bool isActive)
+//		{
+//			for (int i = 0; i < colliderWeapons.Length; i++) {
+//				colliderWeapons [i].GetComponentInChildren<Collider> ().enabled = isActive;
+//			}
+//		}
+//
+//
+//		void Start ()
+//		{
+//			isActiveCollider = false;
+//		}
+//
+//		void Update ()
+//		{
+//			colliderWeapons = GameObject.FindGameObjectsWithTag ("Weapon");
+//
+//			RaycastHit hit;
+//			Ray ray = new Ray (Inventory.instance.leftHand.transform.position, Inventory.instance.leftHand.transform.forward);
+//
+//			float range = 2.99f;
+//			Debug.DrawRay (Inventory.instance.leftHand.transform.position,Inventory.instance.leftHand.transform.forward * range, Color.blue);
+//
+//			ColliderWeapon (true);
+//
+//			if (Physics.Raycast (ray, out hit, range)) {
+//				Enemy enemy = hit.collider.GetComponent<Enemy> ();
+//				if (enemy != null) {
+//					if (enemy.agent.enabled) {
+//						return;
+//					}
+//				}
+//					
+//				if (isActiveCollider) {
+//					ColliderWeapon (true);	
+//				} else {
+//					ColliderWeapon (false);	
+//				}
+//					
+//				GameObject colliderInteractableObject = TriggerStart (hit.collider);
+//
+//				if (touchedObject == null || hit.collider.transform.IsChildOf (touchedObject.transform)) {
+//					triggerIsColliding = false;
+//				}
+//
+//				if (touchedObject == null && colliderInteractableObject != null && IsObjectInteractable (hit.collider.gameObject)) {
+//					touchedObject = colliderInteractableObject;
+//					VRTK_InteractableObject touchedObjectScript = touchedObject.GetComponent<VRTK_InteractableObject> ();
+//
+//					//If this controller is not allowed to touch this interactable object then clean up touch and return before initiating a touch.
+//					if (touchedObjectScript != null && !touchedObjectScript.IsValidInteractableController (gameObject, touchedObjectScript.allowedTouchControllers)) {
+//						CleanupEndTouch ();
+//						return;
+//					}
+//
+//					OnControllerStartTouchInteractableObject (SetControllerInteractEvent (touchedObject));
+//					StoreTouchedObjectColliders (hit.collider);
+//
+//					touchedObjectScript.ToggleHighlight (true);
+//					ToggleControllerVisibility (false);
+//					CheckRumbleController (touchedObjectScript);
+//					touchedObjectScript.StartTouching (this);
+//
+//					OnControllerTouchInteractableObject (SetControllerInteractEvent (touchedObject));
+//				}
+//
+//			} 
+//
+//		}
 
 
 

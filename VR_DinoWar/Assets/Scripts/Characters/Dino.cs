@@ -39,16 +39,28 @@ public class Dino : Enemy {
 		foreach(Rigidbody rb in rbs)
 		{
 			rb.useGravity = true;
-
-			float rand = Random.Range (5f,8f);
+			rb.isKinematic = false;
+			rb.constraints = RigidbodyConstraints.None;
+		
+			float rand = Random.Range (5f,7f);
 			Vector3 v = rb.velocity;
 
-			if (rb.velocity.y > 10f) {
+			if (rb.velocity.x > 9f ) {
+				v.x = rand;
+				rb.velocity = v;
+			}
+
+			if (rb.velocity.y > 9f ) {
 				v.y = rand;
 				rb.velocity = v;
 			}
 
+			if (rb.velocity.z > 9f ) {
+				v.z = rand;
+				rb.velocity = v;
+			}
 		}
+
 		bodyIK.enabled = false;
 		animator.enabled = false;
 	}

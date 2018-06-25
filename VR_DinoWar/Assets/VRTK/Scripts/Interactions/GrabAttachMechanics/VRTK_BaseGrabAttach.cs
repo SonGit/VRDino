@@ -199,7 +199,10 @@ namespace VRTK.GrabAttachMechanics
         protected virtual void Awake()
         {
             Initialise();
+			bow = this.GetComponent<Bow> ();
         }
+
+		Bow bow;
 
         protected virtual void ThrowReleasedObject(Rigidbody objectRigidbody)
         {
@@ -221,6 +224,19 @@ namespace VRTK.GrabAttachMechanics
                         {
                             objectRigidbody.velocity = origin.TransformVector(velocity) * (grabbingObjectThrowMultiplier * throwMultiplier);
                             objectRigidbody.angularVelocity = origin.TransformDirection(angularVelocity);
+
+							if (bow != null) {
+
+								if(objectRigidbody.velocity.magnitude < 7.5f)
+									bow.Thrown (false);
+								else
+									bow.Thrown ();
+
+								print (objectRigidbody.velocity.magnitude);
+							}
+							else {
+								Debug.Log ("NO BOW SCRIPT!");
+							}
                         }
                         else
                         {

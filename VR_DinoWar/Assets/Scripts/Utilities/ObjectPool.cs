@@ -24,6 +24,8 @@ public class ObjectPool : MonoBehaviour {
 
 	GenericObject<SmokeEffect> smokeEffect;
 
+	GenericObject<ExplosionBoom> explosionBoom;
+
 	void Awake()
 	{
 		instance = this;
@@ -39,6 +41,7 @@ public class ObjectPool : MonoBehaviour {
 		stunEffect = new GenericObject<StunEffect>(ObjectFactory.PrefabType.StunEffect,1);
 		audioS = new GenericObject<Audio>(ObjectFactory.PrefabType.AudioSource,1);
 		smokeEffect = new GenericObject<SmokeEffect> (ObjectFactory.PrefabType.SmokeEffect, 1);
+		explosionBoom = new GenericObject<ExplosionBoom> (ObjectFactory.PrefabType.Explosion, 1);
 	}
 
 	public HitNumber GetHitNumber()
@@ -85,5 +88,10 @@ public class ObjectPool : MonoBehaviour {
 	public SmokeEffect GetSmokeEffect()
 	{
 		return smokeEffect.GetObj ();
+	}
+
+	public ExplosionBoom GetExplosionBoom()
+	{
+		return explosionBoom.GetObj ();
 	}
 }

@@ -57,7 +57,6 @@ public class EnemyGrab : VRTK_BaseJointGrabAttach {
 							isThrow = true;
 							rbGrab = this.GetComponent<Rigidbody> ();
 							rbGrab.useGravity = true;
-
 						}
 						else {
 
@@ -147,8 +146,8 @@ public class EnemyGrab : VRTK_BaseJointGrabAttach {
 			isHold = false;
 			rbGrab = this.GetComponent<Rigidbody> ();
 			rbGrab.isKinematic = true;
-			Inventory.instance.leftHand.GetComponent<VRTK_InteractTouch>().isActiveCollider = false;
-			Inventory.instance.rightHand.GetComponent<VRTK_InteractTouch> ().isActiveCollider = false;
+			//Inventory.instance.leftHand.GetComponent<VRTK_InteractTouch>().isActiveCollider = false;
+			//Inventory.instance.rightHand.GetComponent<VRTK_InteractTouch> ().isActiveCollider = false;
 		}
 
 	}

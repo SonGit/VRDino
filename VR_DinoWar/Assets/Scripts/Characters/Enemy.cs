@@ -63,8 +63,13 @@ public abstract class Enemy : Character {
 		{
 			rb.useGravity = false;
 			rb.isKinematic = false;
-		}
+			rb.constraints = RigidbodyConstraints.FreezeRotation;
 
+			if (rb.name == "DinolonglegLLegAnkle" || rb.name == "DinolonglegLLegPlatform" || rb.name == "DinolonglegRLegAnkle" || rb.name == "DinolonglegRLegPlatform" || rb.name == "Elbow_L" || rb.name == "DinolonglegRLegPlatform" || rb.name == "Elbow_R") {
+				rb.isKinematic = true;
+			}
+		}
+			
 		colliders = this.GetComponentsInChildren<Collider> ();
 		OnOffCollider (true,true);
 	}
@@ -89,6 +94,12 @@ public abstract class Enemy : Character {
 			if (footstepSFX.isPlaying)
 				footstepSFX.Stop ();
 		}
+
+
+		if (transform.position.y < -1f) {
+			OnHit (500);
+		}
+
 
 
 	}
@@ -234,9 +245,12 @@ public abstract class Enemy : Character {
 
 	public void Blast(Vector3 center)
 	{
-		OnHit (1000);
-		// Show hit number pop up
-		ShowHitNumber (1000);
+		if (hitPoints > 0) {
+			OnHit (250);
+			// Show hit number pop up
+			//ShowHitNumber (50);
+		}
+
 	}
 		
 	public void LocalAvoidanceOn()
@@ -342,6 +356,18 @@ public abstract class Enemy : Character {
 				colliders [i].enabled = boolCollider;
 			}
 		}
+	}
+
+
+	Enemy enemy;
+	public bool CheckIfAPlayer(Transform targetTransform)
+	{
+		enemy = targetTransform.GetComponent<Enemy> ();
+
+		if (enemy != null)
+			return true;
+
+		return false;
 	}
 
 		
