@@ -138,6 +138,7 @@ public class Dino : Enemy {
 		ThrowObject obj = ObjectPool.instance.GetRockThrow ();
 
 		if (stateController.playerReference != null) {
+			obj.Live ();
 			obj.transform.position = transform.position;
 			obj.Launch (stateController.playerReference.transform.position, transform);
 		} else {

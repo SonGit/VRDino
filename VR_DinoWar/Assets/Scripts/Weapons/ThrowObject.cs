@@ -34,7 +34,7 @@ public class ThrowObject : Cacheable {
 
 	// Use this for initialization
 	void Start () {
-
+		Destroy ();
 	}
 	
 	// Update is called once per frame
@@ -66,6 +66,8 @@ public class ThrowObject : Cacheable {
 	{
 		h = 5;
 		hasCausedDamage = false;
+		gameObject.SetActive (true);
+		hasInit = false;
 	}
 	#endregion
 
@@ -161,15 +163,37 @@ public class ThrowObject : Cacheable {
 		if (!hasCausedDamage) {
 			if (enemy != null) {
 				enemy.Hit (collision.collider,collision.contacts[0].point,25);
+				StartCoroutine (WaitDestroy());
 				hasCausedDamage = true;
 			}
 
 			if (player != null) {
 				player.OnHit (10);
+				StartCoroutine (WaitDestroy());
+				hasCausedDamage = true;
+			}
+
+			if (collision.gameObject.tag == "Terrain 1") {
+				StartCoroutine (WaitDestroy());
 				hasCausedDamage = true;
 			}
 		}
 
-		//print ("stone " + collision.gameObject.name);
+
+
+	}
+
+	IEnumerator WaitDestroy()
+	{
+		yield return new WaitForSeconds (4f);
+		SmokeEffect (transform);
+		Destroy ();
+	}
+
+	protected void SmokeEffect(Transform pos)
+	{
+		SmokeEffect smokeEffect = ObjectPool.instance.GetSmokeEffect ();
+		smokeEffect.transform.position = pos.position;
+		smokeEffect.Live ();
 	}
 }

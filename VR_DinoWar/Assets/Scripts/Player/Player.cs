@@ -44,7 +44,7 @@ public class Player : Character {
 		LeftHandTouch = leftHand.GetComponent<VRTK_InteractTouch> ();
 		LeftHandGrab = leftHand.GetComponent<VRTK_InteractGrab> ();
 
-		RightHandEvents.TouchpadPressed += new ControllerInteractionEventHandler(GrabSpear);
+		RightHandEvents.GripPressed += new ControllerInteractionEventHandler(GrabSpear);
 	}
 	
 	// Update is called once per frame
