@@ -6,6 +6,9 @@ using RootMotion.Dynamics;
 
 public class Dino : Enemy {
 
+	public float countThrow;
+	public bool isThrowing;
+
 	// Use this for initialization
 	IEnumerator Start () {
 
@@ -28,8 +31,7 @@ public class Dino : Enemy {
 			OnHit (1000);
 		}
 
-
-
+		ThrowTrigger ();
 	}
 		
 
@@ -89,6 +91,7 @@ public class Dino : Enemy {
 	{
 		gameObject.SetActive (true);
 		Initialize ();
+		isThrowing = false;
 	}
 
 
@@ -96,5 +99,59 @@ public class Dino : Enemy {
 	{
 		gameObject.SetActive (false);
 	}
+
+	void ThrowTrigger ()
+	{
+		if (stateController.playerReference == null) {
+			return;
+		}
+
+		float distanceToPlayer = Vector3.Distance (stateController.playerReference.transform.position,transform.position);
+	
+		if (distanceToPlayer < 30) {
+			return;
+		}
+
+		if (!isThrowing) {
+			countThrow += Time.deltaTime;
+			if (countThrow > 3) {
+				Throw ();
+				countThrow = 0;
+			}
+		}
+
+	}
+
+	void Throw()
+	{
+		isThrowing = true;
+
+		stateController.AIEnabled = false;
+		agent.enabled = false;
+		animator.SetInteger ("State",0);
+		animator.SetTrigger ("Attack2Trigger");
+	}
+
+	#region animation events
+	void StartThrow()
+	{
+		ThrowObject obj = ObjectPool.instance.GetRockThrow ();
+
+		if (stateController.playerReference != null) {
+			obj.transform.position = transform.position;
+			obj.Launch (stateController.playerReference.transform.position, transform);
+		} else {
+			isThrowing = false;
+		}
+	}
+
+	void EndThrow()
+	{
+		stateController.AIEnabled = true;
+		agent.enabled = true;
+		isThrowing = false;
+	}
+
+	#endregion
 
 }

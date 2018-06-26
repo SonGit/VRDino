@@ -7,9 +7,29 @@ public class Player : Character {
 
 	public static Player instance;
 
-	public int enemyNo = 0;
+	#region weapon
+	public Spear spear;
+	#endregion
 
+	#region player info
+	public int enemyNo = 0;
 	public int score;
+	#endregion
+
+	#region player hands
+	[Tooltip("Drag Right Controller in [VRTK_scripts] here")]
+	[SerializeField]
+	private Transform rightHand;
+	[Tooltip("Drag Left Controller in [VRTK_scripts] here")]
+	[SerializeField]
+	private Transform leftHand;
+	//Cache Components
+	private VRTK_InteractTouch RightHandTouch; 
+	private VRTK_InteractGrab RightHandGrab;
+	private VRTK_ControllerEvents RightHandEvents;
+	private VRTK_InteractTouch LeftHandTouch;
+	private VRTK_InteractGrab LeftHandGrab;
+	#endregion
 
 	void Awake()
 	{
@@ -18,7 +38,13 @@ public class Player : Character {
 
 	// Use this for initialization
 	void Start () {
+		RightHandTouch = rightHand.GetComponent<VRTK_InteractTouch> ();
+		RightHandGrab = rightHand.GetComponent<VRTK_InteractGrab> ();
+		RightHandEvents =  rightHand.GetComponent<VRTK_ControllerEvents> ();
+		LeftHandTouch = leftHand.GetComponent<VRTK_InteractTouch> ();
+		LeftHandGrab = leftHand.GetComponent<VRTK_InteractGrab> ();
 
+		RightHandEvents.TouchpadPressed += new ControllerInteractionEventHandler(GrabSpear);
 	}
 	
 	// Update is called once per frame
@@ -76,5 +102,17 @@ public class Player : Character {
         hitPoints = 100;
         score = 0;
     }
+
+
+	public void GrabWeapon (GameObject weapon)
+	{
+		RightHandTouch.ForceTouch (weapon);
+		RightHandGrab.AttemptGrab ();
+	}
+
+	private void GrabSpear(object sender, ControllerInteractionEventArgs e)
+	{
+		spear.ReturnToHand ();
+	}
 
 }

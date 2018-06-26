@@ -23,7 +23,8 @@ public class ObjectFactory: MonoBehaviour {
 		Dino_LongLeg,
 		AudioSource,
 		SmokeEffect,
-		Explosion
+		Explosion,
+		Rock,
 	}
 
 	public Dictionary<PrefabType,string> PrefabPaths = new Dictionary<PrefabType, string> {
@@ -38,6 +39,7 @@ public class ObjectFactory: MonoBehaviour {
 		{ PrefabType.AudioSource, "Prefabs/AudioSource" },
 		{ PrefabType.SmokeEffect, "Prefabs/SmokeEffect" },
 		{ PrefabType.Explosion, "Prefabs/Explosion" },
+		{ PrefabType.Rock, "Prefabs/Rock" },
 	};
 
 	public GameObject MakeObject(PrefabType type)

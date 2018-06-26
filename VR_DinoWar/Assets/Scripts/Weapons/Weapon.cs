@@ -39,8 +39,8 @@ public class Weapon : VRTK_InteractableObject {
 		// Physics hack
 		if (inFlight) {
 			transform.eulerAngles = new Vector3( transform.eulerAngles.x + .25f, initialAngle.y , initialAngle.z );
-			//transform.eulerAngles = new Vector3 (transform.eulerAngles.x, initialAngle.y, initialAngle.z);
 		} 
+
 	}
 
 	public AudioSource whoosh;
@@ -78,7 +78,7 @@ public class Weapon : VRTK_InteractableObject {
 
 		if(weaponCollider != null)
 		weaponCollider.size = meleeScale;
-		//interactableRigidbody.isKinematic = false;
+		StartCoroutine (ResetPosition_async());
 		print("Grabbed");
 	}
 
@@ -119,9 +119,11 @@ public class Weapon : VRTK_InteractableObject {
 			var hapticStrength = collisionForce / maxCollisionForce;
 			VRTK_ControllerHaptics.TriggerHapticPulse(controllerReference, hapticStrength, 0.5f, 0.01f);
 			CheckIfEnemyAndDealDamage (collision,collision.contacts[0].point,velocity);
-
+		
 			AudioManager.instance.PlayClip (AudioManager.SoundFX.Impact,transform.position);
 		}
+
+		print ("Spear  "+ collision.gameObject.name);
 	}
 		
 	protected void CheckIfEnemyAndDealDamage(Collision collision,Vector3 collisionPoint,float force)
@@ -141,5 +143,13 @@ public class Weapon : VRTK_InteractableObject {
 		print("Ungrabbed");
 	}
 
-
+	ThrowObject throwObj;
+	protected void CheckIfThrowRock(GameObject rockGO)
+	{
+		throwObj = rockGO.GetComponent<ThrowObject> ();
+		// If player indeed hit the enemy
+		if (throwObj != null) {
+			throwObj.Bounce ();
+		}
+	}
 }

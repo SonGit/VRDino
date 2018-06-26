@@ -17,6 +17,8 @@ public abstract class Enemy : Character {
 	public bool isAttack;
 
 
+
+
 	public AudioSource footstepSFX;
 
 	[HideInInspector] public Animator animator;
@@ -38,7 +40,6 @@ public abstract class Enemy : Character {
 	Collider[] colliders;
 
 	EnemyGrab enemyGrab;
-
 
 	public void Initialize()
 	{
@@ -115,7 +116,7 @@ public abstract class Enemy : Character {
 
 			// Run hit animation
 			Vector3 dir = hitCollider.transform.position - collisionPoint;
-			hitReaction.Hit (hitCollider,dir.normalized * impact/6 ,collisionPoint);
+			hitReaction.Hit (hitCollider,dir.normalized * impact/5 ,collisionPoint);
 
 			// Show hit number pop up
 			if (hitPoints > 0) 
@@ -370,5 +371,5 @@ public abstract class Enemy : Character {
 		return false;
 	}
 
-		
+
 }

@@ -7,7 +7,14 @@ public class Spear : Weapon {
 
 	public Collider spearTipCollider;
 	public bool enoughForce;
-	
+
+	private bool spinning;
+	[SerializeField]
+	private float spinSpeed = 700;
+
+	private float goUpTime = 0.25f;
+	private float flyTime = .5f;
+
 	protected override void Awake()
 	{
 		base.Awake ();
@@ -25,15 +32,14 @@ public class Spear : Weapon {
 	{
 		base.Update ();
 
-		if (inFlight) {
+		CalculateVelocity ();
 
-			angle = transform.eulerAngles.x;
-			angle += Time.deltaTime * 40;
-			transform.eulerAngles = new Vector3 (angle, initialAngle.y, initialAngle.z);
-
+		if (spinning) {
+			transform.eulerAngles += new Vector3 (0, spinSpeed * Time.deltaTime, 0);
 		}
 
-		CalculateVelocity ();
+		if (IsGrabbed ())
+			transform.localPosition = Vector3.zero;
 	}
 
 	public override void Thrown(bool enoughForce = true)
@@ -46,28 +52,56 @@ public class Spear : Weapon {
 	{
 		base.FixedUpdate ();
 	}
-
-	protected override void OnHitSurface(Transform hitSurface)
-	{
-		base.OnHitSurface (hitSurface);	
-
-		if (enoughForce) {
-			weaponCollider.enabled = false;
-			interactableRigidbody.isKinematic = true;	
-		} else {
-
-		}
-
-		Enemy enemy = hitSurface.root.GetComponent<Enemy> ();
-		if (enemy != null) {
-			transform.parent = hitSurface.transform;
-			weaponCollider.enabled = false;
-			interactableRigidbody.isKinematic = true;	
-		}
-
-		hasHitSurface = true;
-	}
 		
-	bool hasHitSurface;
+	protected override void OnCollisionEnter (Collision collision)
+	{
+		base.OnCollisionEnter (collision);
+		//print (collision.gameObject.name);
+		CheckIfThrowRock (collision.gameObject);
+
+		if (spinning) {
+			CheckIfEnemyAndDealDamage (collision,collision.contacts[0].point,45);
+		}
+	}
+
+	ThrowObject throwObj;
+	protected void CheckIfThrowRock(GameObject rockGO)
+	{
+		throwObj = rockGO.GetComponent<ThrowObject> ();
+		// If player indeed hit the enemy
+		if (throwObj != null) {
+			throwObj.Bounce ();
+			VRTK_ControllerHaptics.TriggerHapticPulse(controllerReference, .5f, 0.5f, 0.01f);
+		}
+	}
+
+
+	public void ReturnToHand()
+	{
+		float distanceToPlayer = Vector3.Distance (transform.position,Player.instance.transform.position);
+		if (distanceToPlayer > 5) {
+			StartCoroutine (ReturnToHand_Sequence ());
+		} else {
+			Player.instance.GrabWeapon (gameObject);
+		}
+	}
+
+	IEnumerator ReturnToHand_Sequence()
+	{
+		transform.eulerAngles = Vector3.zero;
+		interactableRigidbody.isKinematic = true;
+
+		spinning = true;
+		iTween.MoveBy(gameObject, iTween.Hash("y", 2, "time", goUpTime, "easeType", iTween.EaseType.linear));
+		yield return new WaitForSeconds (goUpTime);
+		iTween.MoveTo(gameObject, iTween.Hash("position", Player.instance.transform.position, "time", flyTime, "easeType", iTween.EaseType.linear));
+		yield return new WaitForSeconds (flyTime);
+		spinning = false;
+
+		interactableRigidbody.isKinematic = false;
+
+		Player.instance.GrabWeapon (gameObject);
+	}
+
 
 }

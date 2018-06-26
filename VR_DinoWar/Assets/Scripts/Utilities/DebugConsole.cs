@@ -87,7 +87,7 @@ public class DebugConsole : MonoBehaviour
 
     public void GameOver()
     {
-        Inventory.instance.DropAllWeapon();
+//        Inventory.instance.DropAllWeapon();
 
         UIConsole.instance.ShowGameOverMenu(true);
 

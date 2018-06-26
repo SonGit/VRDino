@@ -44,14 +44,8 @@ public class AttackAction : Action {
 
 	private void RandomAttack (StateController controller)
 	{
-		int ranAttack = Random.Range (0,2);
-		if (ranAttack == 0) {
-			controller.enemy.animator.SetTrigger ("Attack1Trigger");
-			AudioManager.instance.PlayClip (AudioManager.SoundFX.FatDinoAttack1,controller.enemy.transform.position,0.7f);
-		} else {
-			controller.enemy.animator.SetTrigger ("Attack2Trigger");
-			AudioManager.instance.PlayClip (AudioManager.SoundFX.FatDinoAttack2,controller.enemy.transform.position,0.7f);
-		}
+		controller.enemy.animator.SetTrigger ("Attack1Trigger");
+		AudioManager.instance.PlayClip (AudioManager.SoundFX.FatDinoAttack1,controller.enemy.transform.position,0.7f);
 	}
 		
 }
