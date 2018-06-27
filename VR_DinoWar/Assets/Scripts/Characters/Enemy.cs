@@ -7,40 +7,50 @@ using RootMotion.FinalIK;
 
 public abstract class Enemy : Character {
 
-	public HitReaction hitReaction;
+	#region caches for profiency
+	private HitReaction hitReaction;
 	public FullBodyBipedIK bodyIK;
-	public Transform puppet;
-	public Transform stunEffectPosition;
-	public Transform smokeEffectPosition;
-	public float countAttack;
-	public float rate;
-	public bool isAttack;
+	[SerializeField]
+	private Transform puppet;
+	[SerializeField]
+	private Transform stunEffectPosition; // place where stun fx spawn
+	[SerializeField]
+	private Transform smokeEffectPosition;// place where smoke FX spawn
+	#endregion
 
-
-
-
+	#region sounds vars
 	public AudioSource footstepSFX;
+	#endregion
 
+	#region publics vars
 	[HideInInspector] public Animator animator;
 	[HideInInspector] public NavMeshAgent agent;
 	[HideInInspector] public float initialSpeed; 
 	[HideInInspector] public NavMeshObstacle obs;
 	[HideInInspector] public bool isIdleDone;
+	public StateController stateController;
+	public float countAttack; 
+	public float rate;
+	public bool isAttack;
+	#endregion
 
+	#region events
 	public delegate void OnIdleAnimOverEvent (StateController controller);
 	public OnIdleAnimOverEvent onIdleAnimDone;
 
 	public delegate void OnEndAttackAnim (StateController controller);
 	public OnEndAttackAnim onEndAttackAnim;
+	#endregion
 
 	public bool isJumping;
-
-	public StateController stateController;
 
 	//Collider[] colliders;
 
 	//EnemyGrab enemyGrab;
 
+	/// <summary>
+	/// Put this in Start() to init vars
+	/// </summary>
 	public void Initialize()
 	{
 		animator = this.GetComponent<Animator> ();
@@ -48,8 +58,10 @@ public abstract class Enemy : Character {
 		stateController = this.GetComponentInChildren<StateController> ();
 		obs = this.GetComponentInChildren<NavMeshObstacle> ();
 		//enemyGrab = this.GetComponent<EnemyGrab> ();
-		initialSpeed = agent.speed;
+		hitReaction= this.GetComponentInChildren<HitReaction>();
+		bodyIK = this.GetComponent<FullBodyBipedIK> ();
 
+		initialSpeed = agent.speed;
 		animator.enabled = true;
 		stateController.enabled = true;
 		agent.enabled = true;
@@ -75,6 +87,9 @@ public abstract class Enemy : Character {
 		//OnOffCollider (true,true);
 	}
 
+	/// <summary>
+	/// Put this in Update()
+	/// </summary>
 	protected void Loop()
 	{
 		TrackHitFreq ();
@@ -100,12 +115,12 @@ public abstract class Enemy : Character {
 		if (transform.position.y < -1f) {
 			OnHit (500);
 		}
-
-
-
 	}
 		
-		
+	/// <summary>
+	/// Call this to hit enemy and play hit reactions based on collision point.
+	/// impact determines damage.
+	/// </summary>
 	public void Hit(Collider hitCollider,Vector3 collisionPoint,float impact)
 	{
 		if (!isHit) {
@@ -140,6 +155,9 @@ public abstract class Enemy : Character {
 
 	public float stunTime = 0;
 
+	/// <summary>
+	/// Stun this enemy. Currently not used.
+	/// </summary>
 	public void Stun()
 	{
 		stunTime += 1;
@@ -149,7 +167,7 @@ public abstract class Enemy : Character {
 		StunEffect (stunEffectPosition);
 	}
 
-	float distance;
+	#region animation events
 	// Call by animation event
 	public void StartAttack()
 	{
@@ -159,8 +177,7 @@ public abstract class Enemy : Character {
 	// Call by animation event
 	public void EndAttack()
 	{
-		//onEndAttackAnim (stateController);
-
+		float distance;
 		distance = Vector3.Distance(transform.position,stateController.playerReference.transform.position);
 		if (distance < 5) 
 		{
@@ -168,8 +185,8 @@ public abstract class Enemy : Character {
 		}
 
 		isAttack = false;
-		countAttack = 0;
 	}
+	#endregion
 
 	// Call by animation event
 	public void EndIdle()
@@ -185,6 +202,7 @@ public abstract class Enemy : Character {
 	}
 
 	//Force enemy to follow a pre-defined path 
+	// Not used
 	public void Pathing()
 	{
 		if(agent.isOnNavMesh)
@@ -208,6 +226,10 @@ public abstract class Enemy : Character {
 		
 	}
 
+	/// <summary>
+	/// Orient enemy to a direction
+	/// </summary>
+	/// <param name="destination">Destination.</param>
 	public void FaceTarget(Vector3 destination)
 	{
 		Vector3 lookPos = destination - transform.position;
@@ -216,6 +238,9 @@ public abstract class Enemy : Character {
 		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 2);  
 	}
 		
+	/// <summary>
+	/// On enemy killed
+	/// </summary>
 	protected override void Die()
 	{
 		Player.instance.ReduceEngagedEnemy ();
@@ -225,13 +250,15 @@ public abstract class Enemy : Character {
 		agent.enabled = false;
 		RandomDieSound ();
 		DieEffect();
-		print("DIE");
 		ApplyPhysics ();
 		StartCoroutine(WaitDestroy ());
 		//OnOffCollider (false,true);
 		//enemyGrab.ApplyPhysicsGrab ();
 	}
 
+	/// <summary>
+	/// Time before an enemy is gone to pool
+	/// </summary>
 	IEnumerator WaitDestroy()
 	{
 		yield return new WaitForSeconds (10);
@@ -243,7 +270,10 @@ public abstract class Enemy : Character {
 	{
 
 	}
-
+	/// <summary>
+	/// Not used
+	/// </summary>
+	/// <param name="center">Center.</param>
 	public void Blast(Vector3 center)
 	{
 		if (hitPoints > 0) {
@@ -253,7 +283,8 @@ public abstract class Enemy : Character {
 		}
 
 	}
-		
+
+	#region local avoidance	
 	public void LocalAvoidanceOn()
 	{
 		agent.enabled = false;
@@ -265,11 +296,16 @@ public abstract class Enemy : Character {
 		agent.enabled = true;
 		obs.enabled = false;
 	}
+	#endregion
 
+	#region collider fixes
 	float hitTimecount = 0;
 	float hitFreq = .15f;
 	bool isHit;
 
+	/// <summary>
+	/// Prevent enemy from register every collider hit
+	/// </summary>
 	void TrackHitFreq()
 	{
 		if (isHit) {
@@ -282,7 +318,9 @@ public abstract class Enemy : Character {
 
 		}
 	}
+	#endregion
 
+	#region misc effects
 	void ShowHitNumber(int damage)
 	{
 		HitNumber hitNumber = ObjectPool.instance.GetHitNumber ();
@@ -336,6 +374,7 @@ public abstract class Enemy : Character {
 		stateController.AIEnabled = false;
 		agent.enabled = false;
 	}
+	#endregion
 
 	public abstract void RandomHitSound ();
 

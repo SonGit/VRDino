@@ -5,29 +5,45 @@ using VRTK;
 
 public class Weapon : VRTK_InteractableObject {
 
+	#region caches for profiency
 	// Reference to the controller holding this weapon
 	protected VRTK_ControllerReference controllerReference;
-	// is the weapon being thrown?
-	protected bool inFlight;
-	// initial angle before the weapon is thrown
-	protected Vector3 initialAngle;
 	// local collider reference 
 	public BoxCollider weaponCollider;
+	// Cache
+	protected Enemy enemy;
+	#endregion
+
+	#region collider/physics
+	//Mainly use for calculating weapon velocity
+	public Transform weaponTip;
 	// melee collider size - for melee uses only
 	public Vector3 meleeScale;
 	// thrown collider size - for when weapon is thrown 
 	public Vector3 thrownScale;
-	//Mainly use for calculating weapon velocity
-	public Transform weaponTip;
 	// Min force player must physically applied to have a valid hit
 	public float minForce;
-
 	// for weapon velocity calculating
 	private Vector3 previous;
+	// for weapon velocity calculating
 	protected float velocity;
+	private float impactMagnifier = 120f;
+	private float collisionForce = 0f;
+	private float maxCollisionForce = 4000f;
+	#endregion
 
-	// Cache
-	protected Enemy enemy;
+	#region private vars
+	// is the weapon being thrown?
+	protected bool inFlight;
+	// initial angle before the weapon is thrown
+	protected Vector3 initialAngle;
+	// is player holding using 2 hands ?
+	protected bool twoHanded;
+	#endregion
+
+	#region audio
+	public AudioSource whoosh;
+	#endregion
 
 	// Use this for initialization
 	protected void Initialize () {
@@ -35,15 +51,17 @@ public class Weapon : VRTK_InteractableObject {
 		weaponCollider.isTrigger = false;
 	}
 
+	/// <summary>
+	/// Put in Update().
+	/// </summary>
 	protected void Loop () {
 		// Physics hack
 		if (inFlight) {
 			transform.eulerAngles = new Vector3( transform.eulerAngles.x + .25f, initialAngle.y , initialAngle.z );
 		} 
-
 	}
 
-	public AudioSource whoosh;
+
 	// Put this in FixedUpdate()
 	protected void CalculateVelocity()
 	{
@@ -69,7 +87,7 @@ public class Weapon : VRTK_InteractableObject {
 		weaponCollider.isTrigger = false;
 		weaponCollider.size = thrownScale;
 	}
-	protected bool twoHanded;
+
 	// reset position on grab
 	public override void Grabbed(VRTK_InteractGrab grabbingObject)
 	{
@@ -88,7 +106,6 @@ public class Weapon : VRTK_InteractableObject {
 
 	protected void ResetPosition(object sender, InteractableObjectEventArgs e)
 	{
-		print ("ResetPosition");
 		StartCoroutine (ResetPosition_async());
 	}
 
@@ -105,9 +122,7 @@ public class Weapon : VRTK_InteractableObject {
 		print ("OnHitSurface" + hitSurface.name);		
 		inFlight = false;
 	}
-	private float impactMagnifier = 120f;
-	private float collisionForce = 0f;
-	private float maxCollisionForce = 4000f;
+
 	protected virtual void OnCollisionEnter(Collision collision)
 	{
 		// This means that the weapon is thrown and hit a surface
