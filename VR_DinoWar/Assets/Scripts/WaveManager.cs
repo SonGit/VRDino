@@ -34,18 +34,22 @@ public class WaveManager : MonoBehaviour
 
 	public Wave[] waves;
 	public float timeBetweenWaves = 5f;
+	public float timeNextWave = 50f;
+	public float nextWaveCountdown;
 	public float waveCountDown;
+
 	public SpawnState state = SpawnState.Counting;
 
 
 	private int nextWave = 0;
-	private float searchCountdown = 1f;
 	private int countWave;
+
 
 	void Start ()
 	{
         Stop();
         waveCountDown = timeBetweenWaves;
+		nextWaveCountdown = timeNextWave;
 	}
 
     public void Stop()
@@ -87,14 +91,11 @@ public class WaveManager : MonoBehaviour
 
 	private bool EnemyIsAlive ()
 	{
-		searchCountdown -= Time.deltaTime;
-		if (searchCountdown <= 0) 
+		nextWaveCountdown -= Time.deltaTime;
+		if (nextWaveCountdown <= 0 || GameObject.FindGameObjectWithTag("Enemy") == null) 
 		{
-			searchCountdown = 1f;
-			if (GameObject.FindGameObjectWithTag("Enemy") == null) 
-			{
-				return false;
-			}
+			nextWaveCountdown = timeNextWave;
+			return false;
 		}
 			
 		return true;

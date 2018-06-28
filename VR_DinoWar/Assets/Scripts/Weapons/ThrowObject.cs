@@ -165,10 +165,11 @@ public class ThrowObject : Cacheable {
 				enemy.Hit (collision.collider,collision.contacts[0].point,25);
 				StartCoroutine (WaitDestroy());
 				hasCausedDamage = true;
+				enemy.isGetScore = false;
 			}
 
 			if (player != null) {
-				player.OnHit (5);
+				player.OnHit (0);
 				StartCoroutine (WaitDestroy());
 				hasCausedDamage = true;
 			}
@@ -178,9 +179,6 @@ public class ThrowObject : Cacheable {
 				hasCausedDamage = true;
 			}
 		}
-
-
-
 	}
 
 	IEnumerator WaitDestroy()

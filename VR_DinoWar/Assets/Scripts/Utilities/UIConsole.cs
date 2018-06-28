@@ -28,8 +28,10 @@ public class UIConsole : MonoBehaviour {
     {
 		if (visibility) {
 			menu.Show ();
+			//MainMenu.instance.ShowCollider ();
 		} else {
 			menu.Hide ();
+			MainMenu.instance.HideCollider ();
 		}
     }
 
@@ -42,8 +44,10 @@ public class UIConsole : MonoBehaviour {
     {
 		if (visibility) {
 			gameOverMenu.Show ();
+			//GameOverMenu.instance.ShowCollider ();
 		} else {
 			gameOverMenu.Hide ();
+			GameOverMenu.instance.HideCollider ();
 		}
     }
 
@@ -51,8 +55,10 @@ public class UIConsole : MonoBehaviour {
 	{
 		if (visibility) {
 			tutorialMenu.Show ();
+			//TutorialMenu.instance.ShowCollider ();
 		} else {
 			tutorialMenu.Hide ();
+			//TutorialMenu.instance.HideCollider ();
 		}
 
 	}

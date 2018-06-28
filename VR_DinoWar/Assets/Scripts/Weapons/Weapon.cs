@@ -38,6 +38,7 @@ public class Weapon : VRTK_InteractableObject {
 	// initial angle before the weapon is thrown
 	protected Vector3 initialAngle;
 	// is player holding using 2 hands ?
+	[SerializeField]
 	protected bool twoHanded;
 	#endregion
 
@@ -154,6 +155,7 @@ public class Weapon : VRTK_InteractableObject {
 		// If player indeed hit the enemy
 		if (enemy != null) {
 			enemy.Hit (collision.collider,collisionPoint,force);
+			enemy.isGetScore = true;
 		}
 	}
 

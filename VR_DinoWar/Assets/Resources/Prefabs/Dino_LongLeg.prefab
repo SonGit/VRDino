@@ -1637,7 +1637,7 @@ BoxCollider:
   m_GameObject: {fileID: 1567341569840836}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1649,7 +1649,7 @@ BoxCollider:
   m_GameObject: {fileID: 1623574061418990}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1661,7 +1661,7 @@ BoxCollider:
   m_GameObject: {fileID: 1769514929718516}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1685,7 +1685,7 @@ BoxCollider:
   m_GameObject: {fileID: 1895857415067072}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1697,7 +1697,7 @@ BoxCollider:
   m_GameObject: {fileID: 1916787983128202}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1709,7 +1709,7 @@ BoxCollider:
   m_GameObject: {fileID: 1146546385722648}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -3470,22 +3470,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 300
-  hitReaction: {fileID: 114488763405194850}
   bodyIK: {fileID: 114750821538895048}
   puppet: {fileID: 4357217713564898}
   stunEffectPosition: {fileID: 4628050971781088}
   smokeEffectPosition: {fileID: 4470227698148690}
-  countAttack: 0
-  rate: 3
-  isAttack: 0
   footstepSFX: {fileID: 82620226075985718}
   animator: {fileID: 0}
   agent: {fileID: 0}
   initialSpeed: 0
   obs: {fileID: 0}
   isIdleDone: 0
-  isJumping: 0
   stateController: {fileID: 0}
+  countAttack: 0
+  rate: 3
+  isAttack: 0
+  isJumping: 0
   stunTime: 0
 --- !u!114 &114970004585563614
 MonoBehaviour:

@@ -33,7 +33,7 @@ public class DebugConsole : MonoBehaviour
     {
         print("Start Game!");
         UIConsole.instance.ShowMainMenu(false);
-        UIConsole.instance.ShowHUD(true);
+        //UIConsole.instance.ShowHUD(true);
         UIConsole.instance.ShowGameOverMenu(false);
 		UIConsole.instance.ShowTutorialMenu(false);
 

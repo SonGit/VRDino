@@ -32,6 +32,7 @@ public abstract class Enemy : Character {
 	public float countAttack; 
 	public float rate;
 	public bool isAttack;
+	public bool isGetScore;
 	#endregion
 
 	#region events
@@ -78,7 +79,7 @@ public abstract class Enemy : Character {
 			rb.isKinematic = false;
 			rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-			if (rb.name == "DinolonglegLLegAnkle" || rb.name == "DinolonglegLLegPlatform" || rb.name == "DinolonglegRLegAnkle" || rb.name == "DinolonglegRLegPlatform" || rb.name == "Elbow_L" || rb.name == "DinolonglegRLegPlatform" || rb.name == "Elbow_R") {
+			if (rb.name == "DinolonglegLLegAnkle" || rb.name == "DinolonglegLLegPlatform" || rb.name == "DinolonglegRLegAnkle" || rb.name == "DinolonglegRLegPlatform" || rb.name == "Elbow_L" || rb.name == "DinolonglegRLegPlatform" || rb.name == "Elbow_R" || rb.name == "UpperArm" || rb.name == "ForeArm" || rb.name == "Hand" ) {
 				rb.isKinematic = true;
 			}
 		}
@@ -181,7 +182,7 @@ public abstract class Enemy : Character {
 		distance = Vector3.Distance(transform.position,stateController.playerReference.transform.position);
 		if (distance < 5) 
 		{
-			Player.instance.OnHit (10);
+			Player.instance.OnHit (0);
 		}
 
 		isAttack = false;
@@ -243,8 +244,11 @@ public abstract class Enemy : Character {
 	/// </summary>
 	protected override void Die()
 	{
+		if (isGetScore) {
+			ScoreManager.instance.GetScore (10);
+		}
+
 		Player.instance.ReduceEngagedEnemy ();
-		ScoreManager.instance.GetScore (10);
 		stateController.enabled = false;
 		obs.enabled = false;
 		agent.enabled = false;

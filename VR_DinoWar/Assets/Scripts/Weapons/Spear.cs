@@ -9,11 +9,13 @@ public class Spear : Weapon {
 	public bool enoughForce;
 
 	private bool spinning;
+	private bool returning;
 	[SerializeField]
 	private float spinSpeed = 700;
 
 	private float goUpTime = 0.25f;
-	private float flyTime = .5f;
+	[SerializeField]
+	private float flyTime = 1;
 
 	protected override void Awake()
 	{
@@ -39,11 +41,14 @@ public class Spear : Weapon {
 		}
 
 		if (IsGrabbed ()) {
-			if(!twoHanded)
-			transform.localEulerAngles = Vector3.zero;
+			if (!twoHanded)
+				transform.localEulerAngles = Vector3.zero;
 			
 			transform.localPosition = Vector3.zero;
 			interactableRigidbody.isKinematic = true;
+		} else {
+			if(!returning)
+			interactableRigidbody.isKinematic = false;
 		}
 
 
@@ -68,7 +73,7 @@ public class Spear : Weapon {
 		CheckIfThrowRock (collision.gameObject);
 
 		if (spinning) {
-			CheckIfEnemyAndDealDamage (collision,collision.contacts[0].point,45);
+			CheckIfEnemyAndDealDamage (collision,collision.contacts[0].point,85);
 		}
 	}
 
@@ -79,6 +84,7 @@ public class Spear : Weapon {
 		// If player indeed hit the enemy
 		if (rock != null) {
 			rock.Bounce ();
+			AudioManager.instance.PlayClip (AudioManager.SoundFX.Impact,transform.position);
 			//VRTK_ControllerHaptics.TriggerHapticPulse(controllerReference, .5f, 0.5f, 0.01f);
 		}
 	}
@@ -96,6 +102,7 @@ public class Spear : Weapon {
 
 	IEnumerator ReturnToHand_Sequence()
 	{
+		returning = true;
 		transform.eulerAngles = Vector3.zero;
 		interactableRigidbody.isKinematic = true;
 
@@ -107,6 +114,7 @@ public class Spear : Weapon {
 		spinning = false;
 
 		interactableRigidbody.isKinematic = false;
+		returning = false;
 
 		Player.instance.GrabWeapon (gameObject);
 	}

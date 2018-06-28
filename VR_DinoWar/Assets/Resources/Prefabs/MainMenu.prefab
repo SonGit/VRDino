@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222373516804536628}
   - component: {fileID: 114402606180525326}
   - component: {fileID: 114886173267969976}
+  - component: {fileID: 65225578612592674}
   m_Layer: 5
   m_Name: ExitBtn
   m_TagString: Untagged
@@ -60,6 +61,7 @@ GameObject:
   - component: {fileID: 222908196060282472}
   - component: {fileID: 114676770330182354}
   - component: {fileID: 114594237360048330}
+  - component: {fileID: 65674046565410244}
   m_Layer: 5
   m_Name: StartBtn
   m_TagString: Untagged
@@ -78,6 +80,7 @@ GameObject:
   - component: {fileID: 222812034040232740}
   - component: {fileID: 114721608478533060}
   - component: {fileID: 114865608585092456}
+  - component: {fileID: 65349740841544472}
   m_Layer: 5
   m_Name: TutBtn
   m_TagString: Untagged
@@ -102,6 +105,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &65225578612592674
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186314530537694}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 420, y: 100, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65349740841544472
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1804339635316412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 439.05453, y: 100, z: 1}
+  m_Center: {x: -2.4524443, y: 0, z: 2.0082135e-16}
+--- !u!65 &65674046565410244
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1683460603474462}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 436.93225, y: 102.202225, z: 1}
+  m_Center: {x: -2.5798323, y: -0.19550323, z: 2.5179613e-15}
 --- !u!114 &114402606180525326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialMenu: {fileID: 0}
+  colliders: []
 --- !u!114 &114594237360048330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -351,8 +391,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114457127415736770}
-        m_MethodName: ShowTutorialMenu
+      - m_Target: {fileID: 0}
+        m_MethodName: ToTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
