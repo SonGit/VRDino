@@ -44,7 +44,7 @@ public class Player : Character {
 		LeftHandTouch = leftHand.GetComponent<VRTK_InteractTouch> ();
 		LeftHandGrab = leftHand.GetComponent<VRTK_InteractGrab> ();
 
-		RightHandEvents.GripPressed += new ControllerInteractionEventHandler(GrabSpear);
+		RightHandEvents.TriggerPressed += new ControllerInteractionEventHandler(GrabSpear);
 	}
 	
 	// Update is called once per frame
@@ -101,13 +101,17 @@ public class Player : Character {
     {
         hitPoints = 100;
         score = 0;
+		this.enabled = true;
+		spear.enabled = true;
     }
 
 
 	public void GrabWeapon (GameObject weapon)
 	{
+		print ("GRAB");
 		RightHandTouch.ForceTouch (weapon);
 		RightHandGrab.AttemptGrab ();
+
 	}
 
 	private void GrabSpear(object sender, ControllerInteractionEventArgs e)
@@ -115,4 +119,10 @@ public class Player : Character {
 		spear.ReturnToHand ();
 	}
 
+	public void DropAllWeapon ()
+	{
+		RightHandGrab.ForceRelease ();
+		LeftHandGrab.ForceRelease ();
+	}
+		
 }

@@ -53,7 +53,7 @@ public class EnemyGrab : VRTK_BaseJointGrabAttach {
 						objectRigidbody.angularVelocity = origin.TransformDirection(angularVelocity);
 
 						if (enemy != null && enemy.hitPoints > 0) {
-							enemy.OnOffCollider (true,false);
+							//enemy.OnOffCollider (true,false);
 							isThrow = true;
 							rbGrab = this.GetComponent<Rigidbody> ();
 							rbGrab.useGravity = true;

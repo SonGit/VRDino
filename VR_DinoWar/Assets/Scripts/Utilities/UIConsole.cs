@@ -6,12 +6,11 @@ public class UIConsole : MonoBehaviour {
 
     public static UIConsole instance;
 
+   
+	public MainMenu menu;
     [SerializeField]
-    private MainMenu menu;
-    [SerializeField]
-    private PlayerHUD hud;
-    [SerializeField]
-    private GameOverMenu gameOverMenu;
+	private PlayerHUD hud;
+	public GameOverMenu gameOverMenu;
 	[SerializeField]
 	private TutorialMenu tutorialMenu;
 
@@ -27,7 +26,11 @@ public class UIConsole : MonoBehaviour {
 
     public void ShowMainMenu(bool visibility)
     {
-        menu.gameObject.SetActive(visibility);
+		if (visibility) {
+			menu.Show ();
+		} else {
+			menu.Hide ();
+		}
     }
 
     public void ShowHUD(bool visibility)
@@ -37,11 +40,20 @@ public class UIConsole : MonoBehaviour {
 
     public void ShowGameOverMenu(bool visibility)
     {
-        gameOverMenu.gameObject.SetActive(visibility);
+		if (visibility) {
+			gameOverMenu.Show ();
+		} else {
+			gameOverMenu.Hide ();
+		}
     }
 
 	public void ShowTutorialMenu(bool visibility)
 	{
-		tutorialMenu.gameObject.SetActive(visibility);
+		if (visibility) {
+			tutorialMenu.Show ();
+		} else {
+			tutorialMenu.Hide ();
+		}
+
 	}
 }

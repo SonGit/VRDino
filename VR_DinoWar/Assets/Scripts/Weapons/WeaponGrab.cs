@@ -41,6 +41,7 @@ public class WeaponGrab : VRTK_ChildOfControllerGrabAttach {
 
 						if (weapon != null) {
 							weapon.Thrown ();
+							weapon.GetComponent<Rigidbody> ().isKinematic = false;
 						}
 						else {
 							Debug.Log ("NO SPEAR SCRIPT!");

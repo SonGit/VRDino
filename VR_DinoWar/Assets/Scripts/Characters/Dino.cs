@@ -6,13 +6,14 @@ using RootMotion.Dynamics;
 
 public class Dino : Enemy {
 
-	public float countThrow;
+	public float timeThrow;
 	public bool isThrowing;
+	public int countThrow;
+	private float throwDelay;
 
 	// Use this for initialization
 	IEnumerator Start () {
 
-		gameObject.SetActive (false);
 		Destroy ();
 		yield return new WaitForSeconds (1);
 	}
@@ -92,6 +93,8 @@ public class Dino : Enemy {
 		gameObject.SetActive (true);
 		Initialize ();
 		isThrowing = false;
+		throwDelay = Random.Range (3,8);
+		countThrow = 0;
 	}
 
 
@@ -112,11 +115,11 @@ public class Dino : Enemy {
 			return;
 		}
 
-		if (!isThrowing) {
-			countThrow += Time.deltaTime;
-			if (countThrow > 3) {
+		if (!isThrowing && countThrow <= 3) {
+			timeThrow += Time.deltaTime;
+			if (timeThrow > throwDelay) {
 				Throw ();
-				countThrow = 0;
+				timeThrow = 0;
 			}
 		}
 
@@ -125,7 +128,8 @@ public class Dino : Enemy {
 	void Throw()
 	{
 		isThrowing = true;
-
+		countThrow++;
+		isIdleDone = true;
 		stateController.AIEnabled = false;
 		agent.enabled = false;
 		animator.SetInteger ("State",0);

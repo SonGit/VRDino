@@ -24,7 +24,7 @@ public class Weapon : VRTK_InteractableObject {
 
 	// for weapon velocity calculating
 	private Vector3 previous;
-	private float velocity;
+	protected float velocity;
 
 	// Cache
 	protected Enemy enemy;
@@ -69,16 +69,20 @@ public class Weapon : VRTK_InteractableObject {
 		weaponCollider.isTrigger = false;
 		weaponCollider.size = thrownScale;
 	}
-
+	protected bool twoHanded;
 	// reset position on grab
 	public override void Grabbed(VRTK_InteractGrab grabbingObject)
 	{
+		if (IsGrabbed()) {
+			twoHanded = true;
+		}
 		base.Grabbed(grabbingObject);
 		controllerReference = VRTK_ControllerReference.GetControllerReference(grabbingObject.controllerEvents.gameObject);
 
 		if(weaponCollider != null)
-		weaponCollider.size = meleeScale;
+			weaponCollider.size = meleeScale;
 		StartCoroutine (ResetPosition_async());
+	
 		print("Grabbed");
 	}
 
@@ -113,6 +117,11 @@ public class Weapon : VRTK_InteractableObject {
 			inFlight = false;
 		}
 
+
+		if (twoHanded) {
+			velocity *= 3;
+		}
+
 		if (VRTK_ControllerReference.IsValid(controllerReference) && IsGrabbed() && velocity > 8)
 		{
 			collisionForce = VRTK_DeviceFinder.GetControllerVelocity(controllerReference).magnitude * impactMagnifier;
@@ -122,8 +131,6 @@ public class Weapon : VRTK_InteractableObject {
 		
 			AudioManager.instance.PlayClip (AudioManager.SoundFX.Impact,transform.position);
 		}
-
-		print ("Spear  "+ collision.gameObject.name);
 	}
 		
 	protected void CheckIfEnemyAndDealDamage(Collision collision,Vector3 collisionPoint,float force)
@@ -140,16 +147,17 @@ public class Weapon : VRTK_InteractableObject {
 		base.Ungrabbed (previousGrabbingObject);
 		weaponCollider.isTrigger = false;
 		//weaponCollider.size = thrownScale;
+		twoHanded = false;
 		print("Ungrabbed");
 	}
 
-	ThrowObject throwObj;
-	protected void CheckIfThrowRock(GameObject rockGO)
-	{
-		throwObj = rockGO.GetComponent<ThrowObject> ();
-		// If player indeed hit the enemy
-		if (throwObj != null) {
-			throwObj.Bounce ();
-		}
-	}
+//	ThrowObject throwObj;
+//	protected void CheckIfThrowRock(GameObject rockGO)
+//	{
+//		throwObj = rockGO.GetComponent<ThrowObject> ();
+//		// If player indeed hit the enemy
+//		if (throwObj != null) {
+//			throwObj.Bounce ();
+//		}
+//	}
 }

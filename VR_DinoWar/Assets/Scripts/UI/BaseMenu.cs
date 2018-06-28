@@ -26,13 +26,13 @@ public abstract class BaseMenu : MonoBehaviour {
 	{
 		EnableCanvas ();
 		ShowEffect ();
-		PlayMenuClickSound ();
+		//PlayMenuClickSound ();
 	}
 
 	public virtual void Hide()
 	{
 		HideEffect ();
-		PlayMenuClickSound ();
+		//PlayMenuClickSound ();
 	}
 
 	protected virtual void ShowEffect ()

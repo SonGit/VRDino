@@ -37,9 +37,9 @@ public abstract class Enemy : Character {
 
 	public StateController stateController;
 
-	Collider[] colliders;
+	//Collider[] colliders;
 
-	EnemyGrab enemyGrab;
+	//EnemyGrab enemyGrab;
 
 	public void Initialize()
 	{
@@ -47,7 +47,7 @@ public abstract class Enemy : Character {
 		agent = this.GetComponentInChildren<NavMeshAgent> ();
 		stateController = this.GetComponentInChildren<StateController> ();
 		obs = this.GetComponentInChildren<NavMeshObstacle> ();
-		enemyGrab = this.GetComponent<EnemyGrab> ();
+		//enemyGrab = this.GetComponent<EnemyGrab> ();
 		initialSpeed = agent.speed;
 
 		animator.enabled = true;
@@ -71,8 +71,8 @@ public abstract class Enemy : Character {
 			}
 		}
 			
-		colliders = this.GetComponentsInChildren<Collider> ();
-		OnOffCollider (true,true);
+		//colliders = this.GetComponentsInChildren<Collider> ();
+		//OnOffCollider (true,true);
 	}
 
 	protected void Loop()
@@ -164,7 +164,7 @@ public abstract class Enemy : Character {
 		distance = Vector3.Distance(transform.position,stateController.playerReference.transform.position);
 		if (distance < 5) 
 		{
-			Player.instance.OnHit (0);
+			Player.instance.OnHit (10);
 		}
 
 		isAttack = false;
@@ -228,13 +228,13 @@ public abstract class Enemy : Character {
 		print("DIE");
 		ApplyPhysics ();
 		StartCoroutine(WaitDestroy ());
-		OnOffCollider (false,true);
-		enemyGrab.ApplyPhysicsGrab ();
+		//OnOffCollider (false,true);
+		//enemyGrab.ApplyPhysicsGrab ();
 	}
 
 	IEnumerator WaitDestroy()
 	{
-		yield return new WaitForSeconds (15);
+		yield return new WaitForSeconds (10);
 		SmokeEffect (smokeEffectPosition);
 		Destroy ();
 	}
@@ -347,17 +347,17 @@ public abstract class Enemy : Character {
 	}
 
 
-	public void OnOffCollider (bool boolTrigger, bool boolCollider)
-	{
-		for (int i = 0; i < colliders.Length; i++) {
-			
-			if (i == 0) {
-				colliders [i].enabled = boolTrigger;
-			} else {
-				colliders [i].enabled = boolCollider;
-			}
-		}
-	}
+//	public void OnOffCollider (bool boolTrigger, bool boolCollider)
+//	{
+//		for (int i = 0; i < colliders.Length; i++) {
+//			
+//			if (i == 0) {
+//				colliders [i].enabled = boolTrigger;
+//			} else {
+//				colliders [i].enabled = boolCollider;
+//			}
+//		}
+//	}
 
 
 	Enemy enemy;

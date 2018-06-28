@@ -38,8 +38,16 @@ public class Spear : Weapon {
 			transform.eulerAngles += new Vector3 (0, spinSpeed * Time.deltaTime, 0);
 		}
 
-		if (IsGrabbed ())
+		if (IsGrabbed ()) {
+			if(!twoHanded)
+			transform.localEulerAngles = Vector3.zero;
+			
 			transform.localPosition = Vector3.zero;
+			interactableRigidbody.isKinematic = true;
+		}
+
+
+//		print ("velocity  " +velocity);
 	}
 
 	public override void Thrown(bool enoughForce = true)
@@ -56,7 +64,7 @@ public class Spear : Weapon {
 	protected override void OnCollisionEnter (Collision collision)
 	{
 		base.OnCollisionEnter (collision);
-		//print (collision.gameObject.name);
+
 		CheckIfThrowRock (collision.gameObject);
 
 		if (spinning) {
@@ -64,14 +72,14 @@ public class Spear : Weapon {
 		}
 	}
 
-	ThrowObject throwObj;
-	protected void CheckIfThrowRock(GameObject rockGO)
+	ThrowObject rock;
+	private void CheckIfThrowRock(GameObject rockGO)
 	{
-		throwObj = rockGO.GetComponent<ThrowObject> ();
+		rock = rockGO.GetComponent<ThrowObject> ();
 		// If player indeed hit the enemy
-		if (throwObj != null) {
-			throwObj.Bounce ();
-			VRTK_ControllerHaptics.TriggerHapticPulse(controllerReference, .5f, 0.5f, 0.01f);
+		if (rock != null) {
+			rock.Bounce ();
+			//VRTK_ControllerHaptics.TriggerHapticPulse(controllerReference, .5f, 0.5f, 0.01f);
 		}
 	}
 

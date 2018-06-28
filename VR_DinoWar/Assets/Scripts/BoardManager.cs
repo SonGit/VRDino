@@ -35,20 +35,26 @@ public class BoardManager : MonoBehaviour {
 
 	private void ShowMessage ()
 	{
-		message = EndMessageScore ();
-		messageTextProCurrentScore.text = message;
+		if (UIConsole.instance.menu != null) {
+			message = EndMessageScore ();
+			messageTextProCurrentScore.text = message;
 
-		message = EndMessageEnemyIsAlive ();
-		messageTextProEnemyIsAlive.text = message;
+			message = EndMessageEnemyIsAlive ();
+			messageTextProEnemyIsAlive.text = message;
 
-		message = EndMessageCurrentWave ();
-		messageTextProCureentWave.text = message;
+			message = EndMessageCurrentWave ();
+			messageTextProCureentWave.text = message;
+		}
 
-		message = EndMessageWaveClear ();
-		messageTextProWaveClear.text = message;
+		if (UIConsole.instance.gameOverMenu != null) {
+			message = EndMessageWaveClear ();
+			messageTextProWaveClear.text = message;
 
-		message = EndMessageTotalScore ();
-		messageTextProTotalScore.text = message;
+			message = EndMessageTotalScore ();
+			messageTextProTotalScore.text = message;
+		}
+
+
 	}
 
 	private string EndMessageScore()

@@ -309,7 +309,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.2, z: 4.2}
+  m_Size: {x: 1, y: 0.35, z: 4.6}
   m_Center: {x: 0.05927811, y: 0.00000047143928, z: 0.4489894}
 --- !u!65 &65473491709853630
 BoxCollider:
@@ -504,8 +504,8 @@ MonoBehaviour:
   allowedUseControllers: 0
   usingState: 0
   weaponCollider: {fileID: 65473491709853630}
-  meleeScale: {x: 0.2, y: 0.14, z: 5}
-  thrownScale: {x: 0.2, y: 0.14, z: 2}
+  meleeScale: {x: 0.2, y: 0.14, z: 6}
+  thrownScale: {x: 0.2, y: 0.14, z: 4}
   weaponTip: {fileID: 4338576993364638}
   minForce: 5
   whoosh: {fileID: 82119430345307126}

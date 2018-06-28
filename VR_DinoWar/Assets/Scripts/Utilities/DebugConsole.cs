@@ -9,15 +9,15 @@ public class DebugConsole : MonoBehaviour
 
 
     [SerializeField]
-    private WaveManager waveManager;
+	private WaveManager waveManager;
     [SerializeField]
-    private VRTK_StraightPointerRenderer VRTK_straightPointerRenderer;
+	private VRTK_StraightPointerRenderer VRTK_straightPointerRenderer;
     [SerializeField]
-    private BoxCollider colliderHeadQuiver;
+	private BoxCollider colliderHeadQuiver;
+
+	//private GameObject objectRadialMenu;
     [SerializeField]
-    private GameObject objectRadialMenu;
-    [SerializeField]
-    private Player player;
+	private Player player;
 
 	void Awake ()
 	{
@@ -37,15 +37,6 @@ public class DebugConsole : MonoBehaviour
         UIConsole.instance.ShowGameOverMenu(false);
 		UIConsole.instance.ShowTutorialMenu(false);
 
-        if (player != null)
-        {
-            player.Reset();
-        }
-        else
-        {
-            print("player is null!");
-        }
-
         if (waveManager != null)
         {
             waveManager.ResetEnemy();
@@ -56,14 +47,33 @@ public class DebugConsole : MonoBehaviour
             print("waveManager is null!");
         }
 
+		if (player != null)
+		{
+			player.Reset();
+		}
+		else
+		{
+			print("player is null!");
+		}
+
         //ShowColliderHeadQuiver(true);
         ShowVRPointer(false);
-        ShowRadialMenu(true);
+        //ShowRadialMenu(true);
     }
 
     public void StopGame()
     {
         print("Stop Game!");
+
+		if (player != null)
+		{
+			player.GetComponent<Player> ().enabled = false;
+			player.spear.enabled = false;
+		}
+		else
+		{
+			print("player is null!");
+		}
 
         if (waveManager != null)
         {
@@ -74,49 +84,79 @@ public class DebugConsole : MonoBehaviour
             print("waveManager is null!");
         }
        
-        ShowRadialMenu(false);
+        //ShowRadialMenu(false);
         ShowVRPointer(true);
         UIConsole.instance.ShowHUD(false);
+		UIConsole.instance.ShowGameOverMenu(false);
+		UIConsole.instance.ShowTutorialMenu(false);
     }
 
     public void ReturnToMainMenu()
     {
         UIConsole.instance.ShowGameOverMenu(false);
+		UIConsole.instance.ShowTutorialMenu(false);
         UIConsole.instance.ShowMainMenu(true);
     }
 
+
+	public void ToTutorial()
+	{
+		UIConsole.instance.ShowTutorialMenu(true);
+		UIConsole.instance.ShowMainMenu(false);
+	}
+
+	public void ToMainMenu()
+	{
+		UIConsole.instance.ShowMainMenu(true);
+		UIConsole.instance.ShowGameOverMenu(false);
+		UIConsole.instance.ShowTutorialMenu(false);
+
+		if (waveManager != null)
+		{
+			waveManager.ResetEnemy();
+			waveManager.ResetWave();
+		}
+		else
+		{
+			print("waveManager is null!");
+		}
+	}
+
     public void GameOver()
     {
-//        Inventory.instance.DropAllWeapon();
-
+		
         UIConsole.instance.ShowGameOverMenu(true);
 
-        if (waveManager != null)
-        {
-            waveManager.GetEnemyCheerWorlds();
-            waveManager.Stop();
-        }
-        else
-        {
-            print("waveManager is null!");
-        }
+		if (player != null)
+		{
+			player.GetComponent<Player> ().enabled = false;
+			player.spear.enabled = false;
+			player.DropAllWeapon();
+		}
+		else
+		{
+			print("player is null!");
+		}
 
-        ShowRadialMenu(false);
+		StopwaveManager ();
+
+
+        //ShowRadialMenu(false);
         ShowVRPointer(true);
         ShowColliderHeadQuiver(false);
     }
 
-    void ShowRadialMenu(bool visible)
-    {
-        if (objectRadialMenu != null)
-        {
-            objectRadialMenu.SetActive(visible);
-        }
-        else
-        {
-            print("objectRadialMenu is null!");
-        }
-    }
+//    void ShowRadialMenu(bool visible)
+//    {
+//        if (objectRadialMenu != null)
+//        {
+//            objectRadialMenu.SetActive(visible);
+//        }
+//        else
+//        {
+//            print("objectRadialMenu is null!");
+//        }
+//    }
 
     void ShowVRPointer(bool visible)
     {
@@ -141,4 +181,16 @@ public class DebugConsole : MonoBehaviour
             print("colliderHeadQuiver is null!");
         }
     }
+
+	private void StopwaveManager (){
+		if (waveManager != null)
+		{
+			waveManager.GetEnemyCheerWorlds();
+			waveManager.Stop();
+		}
+		else
+		{
+			print("waveManager is null!");
+		}
+	}
 }

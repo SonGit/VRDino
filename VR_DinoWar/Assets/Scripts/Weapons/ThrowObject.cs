@@ -168,7 +168,7 @@ public class ThrowObject : Cacheable {
 			}
 
 			if (player != null) {
-				player.OnHit (10);
+				player.OnHit (5);
 				StartCoroutine (WaitDestroy());
 				hasCausedDamage = true;
 			}
@@ -190,7 +190,7 @@ public class ThrowObject : Cacheable {
 		Destroy ();
 	}
 
-	protected void SmokeEffect(Transform pos)
+	private void SmokeEffect(Transform pos)
 	{
 		SmokeEffect smokeEffect = ObjectPool.instance.GetSmokeEffect ();
 		smokeEffect.transform.position = pos.position;
