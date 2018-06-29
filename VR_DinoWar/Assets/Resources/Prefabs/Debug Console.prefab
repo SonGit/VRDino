@@ -148,6 +148,7 @@ MonoBehaviour:
   menu: {fileID: 0}
   hud: {fileID: 0}
   gameOverMenu: {fileID: 0}
+  tutorialMenu: {fileID: 0}
 --- !u!114 &114435585699423244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,7 +163,6 @@ MonoBehaviour:
   waveManager: {fileID: 0}
   VRTK_straightPointerRenderer: {fileID: 0}
   colliderHeadQuiver: {fileID: 0}
-  objectRadialMenu: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &114463550390953346
 MonoBehaviour:
